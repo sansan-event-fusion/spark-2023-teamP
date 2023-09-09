@@ -1,5 +1,6 @@
 "use client";
-import Header from "@/components/Header";
+
+import Header from "./components/Header";
 import { Providers } from "./providers";
 
 export default function RootLayout({
