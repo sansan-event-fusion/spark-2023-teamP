@@ -1,12 +1,14 @@
-export default function Main() {
+import { Container } from "./common";
+
+export default function Main({ children }: { children: React.ReactNode }) {
   return (
-    <div>
-      <h1>新着記事</h1>
-      <ul>
-        <li>記事1</li>
-        <li>記事2</li>
-        <li>記事3</li>
-      </ul>
-    </div>
+    <Container
+      as="main"
+      maxW="container.lg"
+      my="4"
+      minH="calc(100vh - 115px - 2rem)"
+    >
+      {children}
+    </Container>
   );
 }
