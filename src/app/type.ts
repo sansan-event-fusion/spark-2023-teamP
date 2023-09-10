@@ -4,4 +4,6 @@ export type Recruitment = {
   img: string;
   title: string;
   peopleLimit: number;
+  createdAt: string;
+  updatedAt: string;
 };
