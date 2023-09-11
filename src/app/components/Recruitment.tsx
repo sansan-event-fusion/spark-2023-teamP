@@ -1,19 +1,22 @@
-// import RecruitmentList from "./RecruitmentList";
+"use client";
 
+import { useQuery } from "react-query";
 import RecruitmentButton from "./RecruitmentButton";
 import RecruitmentCard from "./RecruitmentCard";
-
-// イメージを書いておきます
+import RecruitmentList from "./RecruitmentList";
+import { getRecruitments } from "../api/helper";
 
 export default function Recruitment() {
-  //   const recruitments = await getRecruitments();
+  const { isLoading, data } = useQuery(["getRecruitments"], getRecruitments);
+
+  if (isLoading || !data) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
-      <RecruitmentCard />
+      <RecruitmentList recruitments={data}/>
       <RecruitmentButton />
-      {/* <RecruitmentList recruitments={recruitments}/> */}
     </div>
-    /* 本番はRecruitmentCardじゃなくてRecruitmentListを書く */
   );
 }
