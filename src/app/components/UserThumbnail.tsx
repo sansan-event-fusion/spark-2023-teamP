@@ -1,17 +1,21 @@
 import React from 'react';
-import { Box, Flex, Avatar, Text } from '@chakra-ui/react';
+import { Box, Flex, Avatar, Text, FlexProps } from '@chakra-ui/react';
 
 type Props = {
+  user: {
     name: string,
     profileImageUrl: string
-};
+  }
+} & FlexProps;
 
-function UserThumbnail({ name, profileImageUrl }: Props) {
+function UserThumbnail(props: Props) {
+  const { user: { name, profileImageUrl }} = props;
+
   return (
-    <Flex alignItems="center">
+    <Flex alignItems="center" {...props}>
       <Avatar size="sm" src={profileImageUrl} />
       <Box ml={2}>
-        <Text fontWeight="bold">{name}</Text>
+        <Text>{name}</Text>
       </Box>
     </Flex>
   );
