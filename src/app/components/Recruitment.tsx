@@ -1,9 +1,9 @@
-import RecruitmentCard from "../RecruitmentCard";
+// import RecruitmentList from "./RecruitmentList";
+
+// イメージを書いておきます
 
 export default function Recruitment() {
-  return (
-    <div>
-      <RecruitmentCard />
-    </div>
-  );
+  //   const recruitments = await getRecruitments();
+
+  return <div>{/* <RecruitmentList recruitments={recruitments}/> */}</div>;
 }
