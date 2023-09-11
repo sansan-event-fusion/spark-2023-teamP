@@ -33,7 +33,7 @@ export default [
                     profileImage: "https://placehold.jp/250x150.png"
                 },
                 body: "今回のハッカソンで担当したい分野はどこですか？",
-                created_at: new Date("2023-9-10 11:00:01"),
+                created_at: new Date("2023-9-10 11:01:00"),
             },
             {
                 user: {
