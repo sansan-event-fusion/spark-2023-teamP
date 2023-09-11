@@ -1,3 +1,5 @@
+export type ApiKind = "userDetail" | "userUpdate" | "recruitmentList" | "recruitmentCreate" | "recruitmentDetail" | "recruitmentUpdate" | "recruitmentApply" | "recruitmentSearch" | "roomDetail";
+
 export type UserDetailParams = {
     userId: number,
 };
