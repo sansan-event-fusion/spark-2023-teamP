@@ -7,12 +7,12 @@ export type UserDetailParams = {
 export type UserDetailBody = void;
 
 export type UserDetailResponse = {
-  id: number,
-  name: string,
-  email: string,
-  birthday: Date,
-  introduction: string,
-  encryptedPassword: string,
+    id: number,
+    name: string,
+    email: string,
+    birthday: Date,
+    introduction: string,
+    encryptedPassword: string,
 };
 
 export type UserUpdateParams = {
@@ -28,34 +28,34 @@ export type UserUpdateBody = {
 export type UserUpdateResponse = void;
 
 export type RecruitmentListParams = void;
-    
+
 export type RecruitmentListBody = void;
 
 export type RecruitmentListResponse = [
-  {
-    id: number,
-    image: string,
-    title: string,
-    organizer: {
-      name: string,
-      profileImage: string,
-    },
-    created_at: Date,
-    peopleLimit: number,
-    participantsCount: number,
-  }
+    {
+        id: number,
+        image: string,
+        title: string,
+        organizer: {
+            name: string,
+            profileImage: string,
+        },
+        created_at: Date,
+        peopleLimit: number,
+        participantsCount: number,
+    }
 ];
 
 export type RecruitmentCreateParams = void;
 
 export type RecruitmentCreateBody = {
-  title: string,
-  description: string,
-  area: string,
-  peopleLimit: number,
-  targets: {
     title: string,
-  },
+    description: string,
+    area: string,
+    peopleLimit: number,
+    targets: {
+        title: string,
+    },
 };
 
 export type RecruitmentCreateResponse = void;
@@ -67,23 +67,23 @@ export type RecruitmentDetailParams = {
 export type RecruitmentDetailBody = void;
 
 export type RecruitmentDetailResponse = {
-  organizer: {
-    id: number,
-    name: string,
-    image: string,
-  },
-  recruitment: {
-    area: string,
-    title: string,
-    targets: [
-      {
+    organizer: {
+        id: number,
+        name: string,
+        image: string,
+    },
+    recruitment: {
+        area: string,
         title: string,
-      }
-    ],
-    description: string,
-    peopleLimit: number,
-    participantsCount: number,
-  },
+        targets: [
+            {
+                title: string,
+            }
+        ],
+        description: string,
+        peopleLimit: number,
+        participantsCount: number,
+    },
 };
 
 export type RecruitmentUpdateParams = {
@@ -91,15 +91,15 @@ export type RecruitmentUpdateParams = {
 };
 
 export type RecruitmentUpdateBody = {
-  title: string,
-  description: string,
-  area: string,
-  peopleLimit: number,
-  targets: [
-    {
-      title: string,
-    }
-  ],
+    title: string,
+    description: string,
+    area: string,
+    peopleLimit: number,
+    targets: [
+        {
+            title: string,
+        }
+    ],
 };
 
 export type RecruitmentUpdateResponse = void;
@@ -129,18 +129,18 @@ export type RoomDetailParams = {
 export type RoomDetailBody = void;
 
 export type RoomDetailResponse = {
-  users: [
-    {
-      id: number,
-      name: string,
-      profileImage: string,
-    }
-  ],
-  messages: [
-    {
-      body: string,
-      user_id: number,
-      created_at: Date,
-    }
-  ],
+    users: [
+        {
+            id: number,
+            name: string,
+            profileImage: string,
+        }
+    ],
+    messages: [
+        {
+            body: string,
+            user_id: number,
+            created_at: Date,
+        }
+    ],
 };
