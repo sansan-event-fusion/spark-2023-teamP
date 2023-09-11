@@ -10,7 +10,7 @@ type Props = {
 const queryClient = new QueryClient();
 const mokedQueryClient = getMockedQueryClient();
 
-function Query({ children, mocked }: Props) {
+function APIClientProvider({ children, mocked }: Props) {
     const client = mocked ? mokedQueryClient : queryClient;
 
     return (
@@ -20,4 +20,4 @@ function Query({ children, mocked }: Props) {
     );
 }
 
-export default Query;
+export default APIClientProvider;
