@@ -1,18 +1,8 @@
-// import { TRecruitment } from "../type";
+import { TRecruitment } from "../type";
 import { Box, Image } from "./common";
 // import NextLink from "next/link";
 
-export default function RecruitmentCard(/* {recruitment}: {recruitment: TRecruitment} */) {
-  const TRecruitment = {
-    id: 1,
-    user_id: 1,
-    name: "みちかず",
-    imgUrl: "https://placehold.jp/250x150.png",
-    title: "テスト投稿タイトル",
-    peopleLimit: "3",
-    createdAt: "2023-9-10",
-    updatedAt: "2023-9-10",
-  };
+export default function RecruitmentCard({recruitment}: {recruitment: TRecruitment}) {
   return (
     <>
       {/* <NextLink href={`/recruitment/${recruitment.id}`}> */}
@@ -23,9 +13,9 @@ export default function RecruitmentCard(/* {recruitment}: {recruitment: TRecruit
         overflow="hidden"
         mb={8}
       >
-        <Image width={400} src={TRecruitment.imgUrl} alt={TRecruitment.title} />
+        <Image width={400} src={recruitment.imgUrl} alt={recruitment.title} />
         <Box m="3" fontWeight="bold" fontSize={20} as="h1">
-          {TRecruitment.title}
+          {recruitment.title}
         </Box>
         <Box
           display="flex"
@@ -35,7 +25,7 @@ export default function RecruitmentCard(/* {recruitment}: {recruitment: TRecruit
           position={"relative"}
         >
           <Box as="span" color="gray.600" fontSize="sm">
-            {TRecruitment.name}
+            {recruitment.name}
           </Box>
           <Box
             as="span"
@@ -44,7 +34,7 @@ export default function RecruitmentCard(/* {recruitment}: {recruitment: TRecruit
             position={"absolute"}
             right={0}
           >
-            {TRecruitment.peopleLimit} 人が参加中
+            {recruitment.peopleLimit} 人が参加中
           </Box>
         </Box>
       </Box>
