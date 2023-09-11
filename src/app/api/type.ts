@@ -1,34 +1,35 @@
-type userDetailParams = {
+export type UserDetailParams = {
     userId: number,
 };
 
-type userDetailBody = void;
+export type UserDetailBody = void;
 
-type userDetailResponse = {
+export type UserDetailResponse = {
   id: number,
   name: string,
   email: string,
   birthday: Date,
   introduction: string,
+  encryptedPassword: string,
 };
 
-type userUpdateParams = {
+export type UserUpdateParams = {
     userId: number,
 };
 
-type userUpdateBody = {
+export type UserUpdateBody = {
     name: string,
     introduction: string,
     profileImage: string,
 };
 
-type userUpdateResponse = void;
+export type UserUpdateResponse = void;
 
-type recruitmentListParams = void;
+export type RecruitmentListParams = void;
     
-type recruitmentListBody = void;
+export type RecruitmentListBody = void;
 
-type recruitmentListResponse = [
+export type RecruitmentListResponse = [
   {
     id: number,
     image: string,
@@ -43,9 +44,9 @@ type recruitmentListResponse = [
   }
 ];
 
-type recruitmentCreateParams = void;
+export type RecruitmentCreateParams = void;
 
-type recruitmentCreateBody = {
+export type RecruitmentCreateBody = {
   title: string,
   description: string,
   area: string,
@@ -55,15 +56,15 @@ type recruitmentCreateBody = {
   },
 };
 
-type recruitmentCreateResponse = void;
+export type RecruitmentCreateResponse = void;
 
-type recruitmentDetailParams = {
+export type RecruitmentDetailParams = {
     recruitmentId: number,
 };
 
-type recruitmentDetailBody = void;
+export type RecruitmentDetailBody = void;
 
-type recruitmentDetailResponse = {
+export type RecruitmentDetailResponse = {
   organizer: {
     id: number,
     name: string,
@@ -83,11 +84,11 @@ type recruitmentDetailResponse = {
   },
 };
 
-type recruitmentUpdateParams = {
+export type RecruitmentUpdateParams = {
     recruitmentId: number,
 };
 
-type recruitmentUpdateBody = {
+export type RecruitmentUpdateBody = {
   title: string,
   description: string,
   area: string,
@@ -99,33 +100,33 @@ type recruitmentUpdateBody = {
   ],
 };
 
-type recruitmentUpdateResponse = void;
+export type RecruitmentUpdateResponse = void;
 
-type recruitmentApplyParams = {
+export type RecruitmentApplyParams = {
     recruitmentId: number,
 };
 
-type recruitmentApplyBody = {
+export type RecruitmentApplyBody = {
     user_id: number,
 };
 
-type recruitmentApplyResponse = void;
+export type RecruitmentApplyResponse = void;
 
-type recruitmentSearchParams = {
+export type RecruitmentSearchParams = {
     keyword: string,
 };
 
-type recruitmentSearchBody = void;
+export type RecruitmentSearchBody = void;
 
-type recruitmentSearchResponse = {};
+export type RecruitmentSearchResponse = {};
 
-type roomDetailPrams = {
+export type RoomDetailPrams = {
     roomId: number,
 };
 
-type roomDetailBody = void;
+export type RoomDetailBody = void;
 
-type roomDetailResponse = {
+export type RoomDetailResponse = {
   users: [
     {
       id: number,
