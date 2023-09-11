@@ -115,11 +115,11 @@ export const recruitmentApplyBody: type.RecruitmentApplyBody = {
 
 export const recruitmentApplyResponse: type.RecruitmentApplyResponse = undefined;
 
-export const recruitmentSearchParams: type.RecruitmentSearchParams = {
+export const recruitmentSearchParams: type.RecruitmentSearchParams = undefined;
+
+export const recruitmentSearchBody: type.RecruitmentSearchBody = {
     keyword: "string"
 };
-
-export const recruitmentSearchBody: type.RecruitmentSearchBody = undefined;
 
 export const recruitmentSearchResponse: type.RecruitmentSearchResponse = {};
 

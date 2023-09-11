@@ -2,13 +2,21 @@ const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT || 'http://localhost:3
 
 type _Params = {
     [key: string]: string | number | boolean;
-};
+} | undefined | null | void;
+
+type _Query = {
+    [key: string]: string | number | boolean;
+} | undefined | null | void;
 
 type _Body = {
-    [key: string]: string | number | boolean;
-};
+    [key: string]: string | string[] | number | number[] | boolean | boolean[] | _Body | _Body[];
+} | undefined | null | void;
 
 function isEmptyObject(obj: any) {
+    if (!obj) {
+        return true;
+    }
+
     return Object.keys(obj).length === 0;
 }
 
@@ -16,29 +24,44 @@ function resolve(path: string) {
     return `${API_ENDPOINT}${path}`;
 }
 
-function withParams(url: string, params: _Params) {
-    if (isEmptyObject(params)) {
-        return url;
+function withParams(path: string, params: _Params) {
+    if (isEmptyObject(params) || !params) { // !params is needed for type inference
+        params = {};
     }
 
-    const queryParamStrings = Object.entries(params).map(([key, value]) => `${key}=${encodeURIComponent(value)}`);
+    return path.replace(/:\w+/g, (match) => {
+        const paramName = match.slice(1);
+        if (params?.hasOwnProperty(paramName)) {
+            return params[paramName].toString();
+        } else {
+            throw new Error(`Missing required parameter: ${paramName}`);
+        }
+    });
+}
+
+function withQuery(path: string, query: _Query) {
+    if (isEmptyObject(query) || !query) { // !params is needed for type inference
+        return path;
+    }
+
+    const queryParamStrings = Object.entries(query).map(([key, value]) => `${key}=${encodeURIComponent(value)}`);
     const queryString = queryParamStrings.join('&');
 
-    return `${url}?${queryString}`;
+    return `${path}?${queryString}`;
 }
 
 async function getRequest(path: string, params: _Params, body: _Body) {
-    if (body) {
+    if (!isEmptyObject(body)) {
         throw new Error('body is not available in a GET request.');
     }
 
-    const url = resolve(path);
+    path = withParams(path, params);
 
-    return await fetch(withParams(url, params));
+    return await fetch(resolve(path));
 }
 
 async function postRequest(path: string, params: _Params, body: _Body) {
-    const url = resolve(path);
+    path = withParams(path, params);
 
     let options: RequestInit = {
         method: 'POST',
@@ -52,11 +75,11 @@ async function postRequest(path: string, params: _Params, body: _Body) {
             body: JSON.stringify(body),
         }
     }
-    return await fetch(withParams(url, params), options);
+    return await fetch(resolve(path), options);
 }
 
 async function patchRequest(path: string, params: _Params, body: _Body) {
-    const url = resolve(path);
+    path = withParams(path, params);
 
     let options: RequestInit = {
         method: 'PATCH',
@@ -70,7 +93,7 @@ async function patchRequest(path: string, params: _Params, body: _Body) {
             body: JSON.stringify(body),
         }
     }
-    return await fetch(withParams(url, params), options);
+    return await fetch(resolve(path), options);
 }
 
 type RequestMethod = "GET" | "POST" | "PATCH";
@@ -86,7 +109,7 @@ export async function request(path: string, method: RequestMethod = "GET", param
     }
 }
 
-export async function requestJson(path: string, method: RequestMethod = "GET", params: _Params = {}, body: _Body = {}) {
+export async function requestJson<T>(path: string, method: RequestMethod = "GET", params: _Params = {}, body: _Body = {}): Promise<T> {
     const res = await request(path, method, params, body);
     const json = await res.json();
     return json;

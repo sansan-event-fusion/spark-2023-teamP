@@ -114,11 +114,11 @@ export type RecruitmentApplyBody = {
 
 export type RecruitmentApplyResponse = void;
 
-export type RecruitmentSearchParams = {
+export type RecruitmentSearchParams = void;
+
+export type RecruitmentSearchBody = {
     keyword: string,
 };
-
-export type RecruitmentSearchBody = void;
 
 export type RecruitmentSearchResponse = {};
 
