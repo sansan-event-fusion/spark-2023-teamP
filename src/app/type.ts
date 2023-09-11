@@ -8,3 +8,21 @@ export type TRecruitment = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type TArticle = {
+  user: {
+    name: string,
+    profileImageUrl: string
+  },
+  recruitment: {
+    imageUrl: string,
+    title: string,
+    peopleLimit: number,
+    participantsCount: number, 
+    description: string,
+    targets: {
+        title: string
+    }[],
+    area: string
+  }
+}
