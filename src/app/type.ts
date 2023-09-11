@@ -8,3 +8,13 @@ export type TRecruitment = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type TRoomMessage = {
+  user: {
+    id: number,
+    name: string,
+    profileImage: string
+  }
+  body: string,
+  created_at: Date,
+};
