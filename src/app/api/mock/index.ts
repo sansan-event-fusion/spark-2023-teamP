@@ -1,6 +1,5 @@
 import { QueryClient } from 'react-query';
-import mockRequestData from './request_data';
-import mockHelperData from './helper_data';
+import mockData from './data';
 
 export function getMockQueryClient() {
     const queryClient = new QueryClient({
@@ -12,10 +11,7 @@ export function getMockQueryClient() {
         }
     });
 
-    mockRequestData.forEach(({ key, response }) => {
-        queryClient.setQueryData(key, response);
-    })
-    mockHelperData.forEach(({ key, response }) => {
+    mockData.forEach(({ key, response }) => {
         queryClient.setQueryData(key, response);
     })
 
