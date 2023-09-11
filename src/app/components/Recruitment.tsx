@@ -1,6 +1,8 @@
 "use client";
 
 import { useQuery } from "react-query";
+import RecruitmentButton from "./RecruitmentButton";
+import RecruitmentCard from "./RecruitmentCard";
 import RecruitmentList from "./RecruitmentList";
 import { getRecruitments } from "../api/helper";
 
@@ -11,5 +13,10 @@ export default function Recruitment() {
     return <div>Loading...</div>;
   }
 
-  return (<RecruitmentList recruitments={data}/>);
+  return (
+    <div>
+      <RecruitmentList recruitments={data}/>
+      <RecruitmentButton />
+    </div>
+  );
 }
