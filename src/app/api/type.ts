@@ -120,7 +120,7 @@ export type RecruitmentSearchBody = void;
 
 export type RecruitmentSearchResponse = {};
 
-export type RoomDetailPrams = {
+export type RoomDetailParams = {
     roomId: number,
 };
 
