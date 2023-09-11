@@ -1,6 +1,8 @@
 import * as type from "./type";
 import { request, requestJson } from "./request";
 
+export type ApiFn<P, B, R> = (params: P, body: B) => Promise<R>;
+
 export async function userDetail(params: type.UserDetailParams, body: type.UserDetailBody = undefined) {
     return await requestJson<type.UserDetailResponse>("/users/:userId", "GET", { params });
 }

@@ -1,5 +1,4 @@
-import { QueryClient } from 'react-query';
-import * as type from "./type";
+import * as type from "../type";
 
 export const userDetailParams: type.UserDetailParams = {
     userId: 142
@@ -146,70 +145,41 @@ export const roomDetailResponse: type.RoomDetailResponse = {
     ]
 };
 
-const apiKinds: type.ApiKind[] = [
-    "userDetail",
-    "userUpdate",
-    "recruitmentList",
-    "recruitmentCreate",
-    "recruitmentDetail",
-    "recruitmentUpdate",
-    "recruitmentApply",
-    "recruitmentSearch",
-    "roomDetail",
-];
-
-const mockData = {
-    userDetail: {
+export default [
+    {
         key: ["userDetail", userDetailParams, userDetailBody],
         response: userDetailResponse
     },
-    userUpdate: {
+    {
         key: ["userUpdate", userUpdateParams, userUpdateBody],
         response: userUpdateResponse
     },
-    recruitmentList: {
+    {
         key: ["recruitmentList", recruitmentListParams, recruitmentListBody],
         response: recruitmentListResponse
     },
-    recruitmentCreate: {
+    {
         key: ["recruitmentCreate", recruitmentCreateParams, recruitmentCreateBody],
         response: recruitmentCreateResponse
     },
-    recruitmentDetail: {
+    {
         key: ["recruitmentDetail", recruitmentDetailParams, recruitmentDetailBody],
         response: recruitmentDetailResponse
     },
-    recruitmentUpdate: {
+    {
         key: ["recruitmentUpdate", recruitmentUpdateParams, recruitmentUpdateBody],
         response: recruitmentUpdateResponse
     },
-    recruitmentApply: {
+    {
         key: ["recruitmentApply", recruitmentApplyParams, recruitmentApplyBody],
         response: recruitmentApplyResponse
     },
-    recruitmentSearch: {
+    {
         key: ["recruitmentSearch", recruitmentSearchParams, recruitmentSearchBody],
         response: recruitmentSearchResponse
     },
-    roomDetail: {
+    {
         key: ["roomDetail", roomDetailParams, roomDetailBody],
         response: roomDetailResponse
     },
-};
-
-export function getMockedQueryClient(targets: type.ApiKind[] = apiKinds) {
-    const queryClient = new QueryClient({
-        defaultOptions: {
-            queries: {
-                retry: false,
-                staleTime: Infinity
-            }
-        }
-    });
-
-    targets.forEach((target) => {
-        queryClient.setQueryData(mockData[target].key, mockData[target].response);
-    });
-
-    return queryClient;
-}
+];

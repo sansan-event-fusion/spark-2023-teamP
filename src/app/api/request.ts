@@ -1,15 +1,15 @@
 const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT || 'http://localhost:3000';
 
-type _Params = {
+export type RequestParams = {
     [key: string]: string | number | boolean;
 };
 
-type _Query = {
+export type RequestQuery = {
     [key: string]: string | number | boolean;
 };
 
-type _Body = {
-    [key: string]: string | string[] | number | number[] | boolean | boolean[] | _Body | _Body[];
+export type RequestBody = {
+    [key: string]: string | string[] | number | number[] | boolean | boolean[] | RequestBody | RequestBody[];
 };
 
 function isEmptyObject(obj: any) {
@@ -24,7 +24,7 @@ function resolve(path: string) {
     return `${API_ENDPOINT}${path}`;
 }
 
-function withParams(path: string, params?: _Params) {
+function withParams(path: string, params?: RequestParams) {
     if (isEmptyObject(params) || !params) { // !params is needed for type inference
         params = {};
     }
@@ -39,7 +39,7 @@ function withParams(path: string, params?: _Params) {
     });
 }
 
-function withQuery(path: string, query?: _Query) {
+function withQuery(path: string, query?: RequestQuery) {
     if (isEmptyObject(query) || !query) { // !params is needed for type inference
         return path;
     }
@@ -50,7 +50,7 @@ function withQuery(path: string, query?: _Query) {
     return `${path}?${queryString}`;
 }
 
-async function getRequest(path: string, params?: _Params, query?: _Query, body?: _Body) {
+async function getRequest(path: string, params?: RequestParams, query?: RequestQuery, body?: RequestBody) {
     if (!isEmptyObject(body)) {
         throw new Error('body is not available in a GET request.');
     }
@@ -61,7 +61,7 @@ async function getRequest(path: string, params?: _Params, query?: _Query, body?:
     return await fetch(resolve(path));
 }
 
-async function postRequest(path: string, params?: _Params, query?: _Query, body?: _Body) {
+async function postRequest(path: string, params?: RequestParams, query?: RequestQuery, body?: RequestBody) {
     path = withParams(path, params);
     path = withQuery(path, query);
 
@@ -80,7 +80,7 @@ async function postRequest(path: string, params?: _Params, query?: _Query, body?
     return await fetch(resolve(path), options);
 }
 
-async function patchRequest(path: string, params?: _Params, query?: _Query, body?: _Body) {
+async function patchRequest(path: string, params?: RequestParams, query?: RequestQuery, body?: RequestBody) {
     path = withParams(path, params);
     path = withQuery(path, query);
 
@@ -100,9 +100,9 @@ async function patchRequest(path: string, params?: _Params, query?: _Query, body
 }
 
 type RequestOptions = {
-    params?: _Params,
-    query?: _Query,
-    body?: _Body
+    params?: RequestParams,
+    query?: RequestQuery,
+    body?: RequestBody
 }
 type RequestMethod = "GET" | "POST" | "PATCH";
 
@@ -117,7 +117,7 @@ export async function request(path: string, method: RequestMethod = "GET", optio
     }
 }
 
-export async function requestJson<T>(path: string, method: RequestMethod = "GET", options?: RequestOptions) {
+export async function requestJson<T>(path: string, method: RequestMethod = "GET", options?: RequestOptions): Promise<T> {
     const res = await request(path, method, options);
     const json = await res.json();
     return json;

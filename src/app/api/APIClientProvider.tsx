@@ -1,6 +1,8 @@
+"use client";
+
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { getMockedQueryClient } from './mock';
+import { getMockQueryClient } from './mock';
 
 type Props = {
     children: React.ReactNode,
@@ -8,10 +10,10 @@ type Props = {
 };
 
 const queryClient = new QueryClient();
-const mokedQueryClient = getMockedQueryClient();
+const mockedQueryClient = getMockQueryClient();
 
 function APIClientProvider({ children, mocked }: Props) {
-    const client = mocked ? mokedQueryClient : queryClient;
+    const client = mocked ? mockedQueryClient : queryClient;
 
     return (
         <QueryClientProvider client={client}>

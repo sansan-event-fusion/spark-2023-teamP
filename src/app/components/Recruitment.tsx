@@ -1,9 +1,15 @@
-// import RecruitmentList from "./RecruitmentList";
+"use client";
 
-// イメージを書いておきます
+import { useQuery } from "react-query";
+import RecruitmentList from "./RecruitmentList";
+import { getRecruitments } from "../api/helper";
 
 export default function Recruitment() {
-  //   const recruitments = await getRecruitments();
+  const { isLoading, data } = useQuery(["getRecruitments"], getRecruitments);
 
-  return <div>{/* <RecruitmentList recruitments={recruitments}/> */}</div>;
+  if (isLoading || !data) {
+    return <div>Loading...</div>;
+  }
+
+  return (<RecruitmentList recruitments={data}/>);
 }
