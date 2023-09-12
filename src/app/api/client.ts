@@ -3,8 +3,28 @@ import { request, requestJson } from "./request";
 
 export type ApiFn<P, B, R> = (params: P, body: B) => Promise<R>;
 
+type TokenResponse = {
+    accessToken: string,
+    authorization: string
+};
+
 export async function signin(params: type.SignInParams = undefined, body: type.SignInBody) {
-    return await requestJson<type.SignInResponse>("/auth/sign_in", "POST", { body });
+    const res = await request("/auth/sign_in", "POST", { body });
+    const data: type.SignInResponse = await res.json();
+
+    const accessToken = res.headers.get("access-token");
+    const authorization = res.headers.get("authorization");
+
+    if (!accessToken || !authorization) {
+        throw new Error("Credenial information is not found in headers");
+    }
+
+    const result: type.SignInResponse & TokenResponse = {
+        ...data,
+        accessToken,
+        authorization
+    };
+    return result;
 }
 
 export async function userDetail(params: type.UserDetailParams, body: type.UserDetailBody = undefined) {
