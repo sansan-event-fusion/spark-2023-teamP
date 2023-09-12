@@ -10,6 +10,7 @@ type formInputs = {
   description: string;
   area: string;
   targets: string;
+  uploadFile: File;
   peopleLimit: number;
 };
 
@@ -61,19 +62,35 @@ const RecruitmentForm = () => {
         </FormControl>
         <FormControl mb={5}>
           <FormLabel htmlFor="targets">対象者</FormLabel>
-          <MultiSelect />
+          <MultiSelect
+            id="targets"
+            {...register("targets", {
+              // 後ほどここにバリデーションを追加
+            })}
+            onChange={(selectedOptions) => {
+              // 選択されたオプションを処理するためのコードをここに追加
+              console.log("選択されたオプション:", selectedOptions);
+            }}
+          />
         </FormControl>
-        <UploadFile />
-        <Button
-          width="100%"
-          mt={7}
-          mb={5}
-          colorScheme="orange"
-          isLoading={isSubmitting}
-          type="submit"
-        >
-          募集する
-        </Button>
+        <FormControl mb={5}>
+          <FormLabel htmlFor="uploadFile">サムネイル画像</FormLabel>
+          <UploadFile
+            id="uploadFile"
+            {...register("uploadFile", {
+              // 後ほどここにバリデーションを追加
+            })}
+          />
+          <Button
+            width="100%"
+            mt={7}
+            colorScheme="orange"
+            isLoading={isSubmitting}
+            type="submit"
+          >
+            募集する
+          </Button>
+        </FormControl>
       </form>
     </Box>
   );

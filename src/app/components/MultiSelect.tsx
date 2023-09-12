@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, BoxProps } from "@chakra-ui/react";
 import {
   ActionMeta,
   MultiValue,
@@ -16,7 +16,9 @@ class Target implements OptionBase {
   ) {}
 }
 
-const MultiSelect = () => {
+const MultiSelect = (
+  props: BoxProps & { onChange: (selectedOptions: Target[]) => void }
+) => {
   const Targets: Target[] = [
     new Target("beginner", "初心者大歓迎", "gray"),
     new Target("everyone", "誰でも！", "blue"),
@@ -62,10 +64,11 @@ const MultiSelect = () => {
       default:
         break;
     }
+    props.onChange(selectedTargets);
   };
 
   return (
-    <Box w="100%">
+    <Box w="100%" {...props}>
       <Select<Target, true, GroupBase<Target>>
         isMulti
         name="multiSelectOptions"

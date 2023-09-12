@@ -1,7 +1,7 @@
-import { Box, Input } from "@chakra-ui/react";
+import { Box, BoxProps, Input } from "@chakra-ui/react";
 import { useCallback, useRef, useState } from "react";
 
-const UploadFile = () => {
+const UploadFile = (props: BoxProps) => {
   const [files, setFiles] = useState<File[]>([]); // 選択したファイルを配列で格納
   const attachRef = useRef<HTMLInputElement>(null); // ファイル選択のコントロールを参照
   const [fileSelected, setFileSelected] = useState(false); // ファイルが選択されたかどうかの状態
@@ -28,7 +28,7 @@ const UploadFile = () => {
 
   return (
     <>
-      <Box>
+      <Box {...props}>
         <Input
           type="button"
           value="画像を選択してください"
