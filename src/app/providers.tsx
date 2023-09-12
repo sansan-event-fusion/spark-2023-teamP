@@ -10,7 +10,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <RecoilRoot>
       <APIClientProvider mocked={true}>
-        <AuthProvider enabled={false}>
+        <AuthProvider disabled={true}>
           <CacheProvider>
             <ChakraProvider>{children}</ChakraProvider>
           </CacheProvider>

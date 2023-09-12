@@ -15,13 +15,13 @@ function isPublic(path: string) {
     return publicPaths.includes(path);
 }
 
-type Props = { children: ReactNode, enabled: boolean };
+type Props = { children: ReactNode, disabled: boolean };
 
-function AuthProvider({ children, enabled }: Props) {
+function AuthProvider({ children, disabled }: Props) {
     const path = usePathname();
     const credential = useRecoilValue(credentialAtom);
 
-    if (enabled && !isPublic(path) && !credential) {
+    if (!disabled && !isPublic(path) && !credential) {
         return (
             <pre>サインインしてください。</pre>
         );
