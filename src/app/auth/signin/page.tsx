@@ -1,6 +1,7 @@
 "use client";
 
 import { useForm } from 'react-hook-form'
+import { useSetRecoilState } from 'recoil';
 import {
     Input,
     Button,
@@ -11,6 +12,8 @@ import {
     Stack
 } from "@/app/components/common";
 import { signin } from '@/app/api/helper';
+import { credentialAtom } from '@/app/atom';
+import { useRouter } from 'next/navigation';
 
 type formInputs = {
     email: string;
@@ -18,16 +21,20 @@ type formInputs = {
 };
 
 function SignIn() {
+    const router = useRouter();
+
     const {
         handleSubmit,
         register,
-        getValues,
-        formState: { errors, isSubmitting },
+        formState: { errors },
     } = useForm<formInputs>();
 
+    const setCredential = useSetRecoilState(credentialAtom);
+
     const onSubmit = handleSubmit(async (data) => {
-        // フォームで入力されたデータをコンソールに表示
         const credential = await signin(data.email, data.password);
+        setCredential(credential);
+        router.push("/");
     });
 
     const isEmailError = !!errors.email;
