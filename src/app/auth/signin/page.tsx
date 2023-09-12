@@ -10,9 +10,10 @@ import {
     FormErrorMessage,
     Stack
 } from "@/app/components/common";
+import { signin } from '@/app/api/helper';
 
 type formInputs = {
-    name: string;
+    email: string;
     password: string;
 };
 
@@ -24,28 +25,28 @@ function SignIn() {
         formState: { errors, isSubmitting },
     } = useForm<formInputs>();
 
-    const onSubmit = handleSubmit((data) => {
+    const onSubmit = handleSubmit(async (data) => {
         // フォームで入力されたデータをコンソールに表示
-        console.log(data)
+        const credential = await signin(data.email, data.password);
     });
 
-    const isNameError = !!errors.name;
+    const isEmailError = !!errors.email;
     const isPasswordError = !!errors.password;
 
     return (
         <form onSubmit={onSubmit}>
             <Stack>
-                <FormControl isInvalid={isNameError}>
-                    <FormLabel htmlFor='name'>Name</FormLabel>
+                <FormControl isInvalid={isEmailError}>
+                    <FormLabel htmlFor='email'>Email</FormLabel>
                     <Input
-                        id='name'
-                        type='text'
-                        {...register('name', {
-                            required: "ユーザー名を入力してください"
+                        id='email'
+                        type='email'
+                        {...register('email', {
+                            required: "メールアドレスを入力してください"
                         })}
                     />
-                    {isNameError && (
-                        <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
+                    {isEmailError && (
+                        <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
                     )}
                 </FormControl>
                 <FormControl isInvalid={isPasswordError}>
