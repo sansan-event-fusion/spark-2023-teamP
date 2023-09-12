@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { Box, BoxProps } from '@chakra-ui/react';
 
 function Capsule(props: BoxProps) {
