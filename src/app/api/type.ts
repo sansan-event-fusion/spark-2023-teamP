@@ -1,5 +1,26 @@
 export type ApiKind = "userDetail" | "userUpdate" | "recruitmentList" | "recruitmentCreate" | "recruitmentDetail" | "recruitmentUpdate" | "recruitmentApply" | "recruitmentSearch" | "roomDetail";
 
+export type SignInParams = {
+    email: string,
+    password: string,
+};
+
+export type SignInBody = void;
+
+export type SignInResponse = {
+    data: {
+        email: string,
+        provider: string,
+        uid: string,
+        profile_image: void,
+        id: number,
+        allow_password_change: boolean,
+        name: string,
+        birthday: string,
+        introduction: string,
+    },
+};
+
 export type UserDetailParams = {
     userId: number,
 };

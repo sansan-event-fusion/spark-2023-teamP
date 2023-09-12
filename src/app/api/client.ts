@@ -3,6 +3,10 @@ import { request, requestJson } from "./request";
 
 export type ApiFn<P, B, R> = (params: P, body: B) => Promise<R>;
 
+export async function signin(params: type.SignInParams, body: type.SignInBody = undefined) {
+    return await requestJson<type.SignInResponse>("/auth/sign_in", "POST", { params });
+}
+
 export async function userDetail(params: type.UserDetailParams, body: type.UserDetailBody = undefined) {
     return await requestJson<type.UserDetailResponse>("/users/:userId", "GET", { params });
 }
