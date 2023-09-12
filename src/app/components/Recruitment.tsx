@@ -2,9 +2,9 @@
 
 import { useQuery } from "react-query";
 import RecruitmentButton from "./RecruitmentButton";
-import RecruitmentCard from "./RecruitmentCard";
 import RecruitmentList from "./RecruitmentList";
 import { getRecruitments } from "../api/helper";
+import SearchBar from "./SearchBar";
 
 export default function Recruitment() {
   const { isLoading, data } = useQuery(["getRecruitments"], getRecruitments);
@@ -15,7 +15,8 @@ export default function Recruitment() {
 
   return (
     <div>
-      <RecruitmentList recruitments={data}/>
+      <SearchBar />
+      <RecruitmentList recruitments={data} />
       <RecruitmentButton />
     </div>
   );
