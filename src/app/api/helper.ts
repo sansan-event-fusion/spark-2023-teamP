@@ -1,5 +1,5 @@
-import { TRecruitment, TRoomMessage } from "../type";
-import { recruitmentList, roomDetail } from "./client";
+import { TArticle, TRecruitment, TRoomMessage } from "../type";
+import { recruitmentList, recruitmentDetail, roomDetail } from "./client";
 
 export async function getRecruitments(): Promise<TRecruitment[]> {
     const params = undefined;
@@ -50,5 +50,27 @@ export async function getRoomChat(roomId: number): Promise<TRoomMessage[]> {
             body,
             created_at 
         };
-    })
+    });
+}
+
+export async function getRecruitmentDetail(id: number): Promise<TArticle> {
+    const params = { recruitmentId: id };
+    const body = undefined;
+    const data = await recruitmentDetail(params, body);
+
+    return {
+        user: {
+            name: data.organizer.name,
+            profileImageUrl: data.organizer.image
+        },
+        recruitment: {
+            imageUrl: "",
+            title: data.recruitment.title,
+            peopleLimit: data.recruitment.peopleLimit,
+            participantsCount: data.recruitment.participantsCount, 
+            description: data.recruitment.description,
+            targets: data.recruitment.targets,
+            area: data.recruitment.area
+        }
+    };
 }
