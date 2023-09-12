@@ -1,5 +1,5 @@
-import { TArticle, TRecruitment } from "../type";
-import { recruitmentList, recruitmentDetail } from "./client";
+import { TArticle, TRecruitment, TRoomMessage } from "../type";
+import { recruitmentList, recruitmentDetail, roomDetail } from "./client";
 
 export async function getRecruitments(): Promise<TRecruitment[]> {
     const params = undefined;
@@ -27,6 +27,30 @@ export async function getRecruitments(): Promise<TRecruitment[]> {
         createdAt: created_at.toString(),
         updatedAt: ""
     }));
+}
+
+export async function getRoomChat(roomId: number): Promise<TRoomMessage[]> {
+    const params = { roomId };
+    const body = undefined;
+    const { users, messages } = await roomDetail(params, body);
+
+    return messages.map(({ body, user_id, created_at }) => {
+        const user = users.find((user) => user.id === user_id);
+
+        if (!user) {
+            throw new Error("user not found");
+        }
+
+        return {
+            user: {
+                id: user.id,
+                name: user.name,
+                profileImage: user.profileImage
+            },
+            body,
+            created_at 
+        };
+    });
 }
 
 export async function getRecruitmentDetail(id: number): Promise<TArticle> {
