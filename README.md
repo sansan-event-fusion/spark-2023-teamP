@@ -27,6 +27,13 @@ npm run dev
 http://localhost:8080
 ```
 
+### テスト実行
+
+```shell
+npm install -D
+npm test
+```
+
 ## サイト構造
 
 - `/` 募集一覧ページ
