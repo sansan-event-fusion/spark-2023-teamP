@@ -1,42 +1,73 @@
 import React, { useState } from "react";
-import { Box, Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
+import {
+  Box,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Button,
+  FormControl,
+  FormLabel,
+} from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
+import MultiSelect from "./MultiSelect";
+import { useForm } from "react-hook-form";
+
+type SearchForm = {
+  keywords: string;
+  targets: string[];
+};
 
 export default function SearchBar() {
-  const [inputValue, setInputValue] = useState("");
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isSubmitting },
+    setValue,
+  } = useForm<SearchForm>();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
+  // フォームが送信されたときの処理
+  const onSubmit = handleSubmit((data) => {
+    // フォームで入力されたデータをコンソールに表示
+    console.log(data);
+  });
 
   return (
-    <Box
-      display="flex"
-      alignItems="center"
-      border="1px solid #ccc"
-      borderRadius="5px"
-      p="5px"
-      bg="#f0f0f0"
-      mt={3}
-      mb={5}
-      boxShadow="0px 2px 4px rgba(0, 0, 0, 0.1)"
-    >
-      <InputGroup>
-        <InputLeftElement pointerEvents="none">
-          <SearchIcon color="gray.300" />
-        </InputLeftElement>
-        <Input
-          type="text"
-          value={inputValue}
-          onChange={handleChange}
-          placeholder="キーワードを入力"
-          border="none"
-          _focus={{
-            border: "none",
-          }}
-          borderRadius="5px"
-        />
-      </InputGroup>
-    </Box>
+    <>
+      <Box>
+        <form onSubmit={onSubmit}>
+          <FormControl mb={5}>
+            <FormLabel htmlFor="keywords" />
+            <InputGroup>
+              <InputLeftElement pointerEvents="none">
+                <SearchIcon color="gray.300" />
+              </InputLeftElement>
+              <Input
+                id="keywords"
+                {...register("keywords", {
+                  // 後ほどここにバリデーションを追加
+                })}
+              />
+            </InputGroup>
+          </FormControl>
+          <MultiSelect
+            id="targets"
+            onSelected={(selectedLabel: string[]) => {
+              setValue("targets", selectedLabel);
+            }}
+          />
+          <Button
+            width="100%"
+            mt={5}
+            bg="orange.500"
+            color="white"
+            isLoading={isSubmitting}
+            type="submit"
+            mb={7}
+          >
+            検索する
+          </Button>
+        </form>
+      </Box>
+    </>
   );
 }

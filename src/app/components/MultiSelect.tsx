@@ -75,7 +75,7 @@ const MultiSelect = (
       <Select<Target, true, GroupBase<Target>>
         isMulti
         name="multiSelectOptions"
-        placeholder="複数選択"
+        placeholder="カテゴリを選択"
         options={Targets}
         value={selectedTargets}
         onChange={handleOnChangeSelectedCats}
