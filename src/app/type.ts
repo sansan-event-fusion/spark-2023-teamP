@@ -9,6 +9,16 @@ export type TRecruitment = {
   updatedAt: string;
 };
 
+export type TRoomMessage = {
+  user: {
+    id: number,
+    name: string,
+    profileImage: string
+  }
+  body: string,
+  created_at: Date,
+};
+
 export type TArticle = {
   user: {
     name: string,
@@ -25,4 +35,4 @@ export type TArticle = {
     }[],
     area: string
   }
-}
+};
