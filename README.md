@@ -26,3 +26,11 @@ npm run dev
 ```
 http://localhost:8080
 ```
+
+## サイト構造
+
+- `/` 募集一覧ページ
+  - `/recruitments` 募集作成ページ
+  - `/auth`
+    - `/auth/signin` sign-inページ
+    - `/auth/signup` sign-upページ
