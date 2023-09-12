@@ -17,7 +17,7 @@ class Target implements OptionBase {
 }
 
 const MultiSelect = (
-  props: BoxProps & { onChange: (selectedOptions: Target[]) => void }
+  props: BoxProps & { onSelected: (selectedLabels: string[]) => void }
 ) => {
   const Targets: Target[] = [
     new Target("beginner", "初心者大歓迎", "gray"),
@@ -37,11 +37,13 @@ const MultiSelect = (
     _newValue: MultiValue<Target>,
     actionMeta: ActionMeta<Target>
   ) => {
+    let new_selectedTargets = selectedTargets;
+
     switch (actionMeta.action) {
       case "select-option":
         if (actionMeta.option) {
           const Targets = actionMeta.option;
-          setSelectedTargets((prev) => [...prev, Targets]);
+          new_selectedTargets = [...selectedTargets, Targets];
           break;
         }
         break;
@@ -51,20 +53,21 @@ const MultiSelect = (
         if (actionMeta.removedValue) {
           const toDeleteTargets = actionMeta.removedValue;
 
-          setSelectedTargets((prev) =>
-            prev.filter((Targets) => Targets.value != toDeleteTargets.value)
+          new_selectedTargets = selectedTargets.filter(
+            (Targets) => Targets.value != toDeleteTargets.value
           );
           break;
         }
         break;
 
       case "clear":
-        setSelectedTargets([]);
+        new_selectedTargets = [];
         break;
       default:
         break;
     }
-    props.onChange(selectedTargets);
+    setSelectedTargets(new_selectedTargets);
+    props.onSelected(new_selectedTargets.map((target) => target.label));
   };
 
   return (
