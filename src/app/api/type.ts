@@ -1,11 +1,11 @@
 export type ApiKind = "userDetail" | "userUpdate" | "recruitmentList" | "recruitmentCreate" | "recruitmentDetail" | "recruitmentUpdate" | "recruitmentApply" | "recruitmentSearch" | "roomDetail";
 
-export type SignInParams = {
+export type SignInParams = void;
+
+export type SignInBody = {
     email: string,
     password: string,
 };
-
-export type SignInBody = void;
 
 export type SignInResponse = {
     data: {
