@@ -2,12 +2,11 @@
 
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { useRecoilValue } from "recoil";
 import { FormLabel, FormControl, Input, Button, Box, Textarea } from "./common";
 import MultiSelect from "./MultiSelect";
 import UploadFile from "./UploadFile";
+import { useMocked, useCurrentUser } from "@/app/state/hooks";
 import { createRecruitment } from "../api/helper";
-import { configAtom, credentialAtom } from "../atom";
 
 // フォームで使用する変数の型を定義
 type formInputs = {
@@ -21,8 +20,8 @@ type formInputs = {
 
 const RecruitmentForm = () => {
   const router = useRouter();
-  const credential = useRecoilValue(credentialAtom)!;
-  const config = useRecoilValue(configAtom)!;
+  const currentUser = useCurrentUser()!;
+  const mocked = useMocked();
 
   const {
     handleSubmit,
@@ -32,10 +31,10 @@ const RecruitmentForm = () => {
   } = useForm<formInputs>();
 
   const onSubmit = handleSubmit(async (data) => {
-    if (config.mocked) {
+    if (mocked) {
       console.log("create recruitment");
       console.log({
-        userId: credential.id,
+        userId: currentUser.id,
         title: data.title,
         description: data.description,
         area: data.area,
@@ -50,7 +49,7 @@ const RecruitmentForm = () => {
     }
 
     await createRecruitment(
-      credential.id,
+      currentUser.id,
       data.title,
       data.description,
       data.area,

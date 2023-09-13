@@ -20,8 +20,12 @@ export const Targets: Target[] = [
   new Target("coders", "コーダー大歓迎", "orange"),
 ];
 
-export function findColorScheme(label: string) {
+function findColorScheme(label: string) {
   return Targets.find((target) => target.label == label)?.colorScheme;
+}
+
+export function getColorScheme(label: string, defaultColor: string = "gray") {
+  return findColorScheme(label) || defaultColor;
 }
 
 export default Target;

@@ -1,5 +1,7 @@
 # フロントエンド
 
+https://rdrsjfm4u3.us-east-1.awsapprunner.com
+
 ## 実行方法
 
 ### サーバー立ち上げ

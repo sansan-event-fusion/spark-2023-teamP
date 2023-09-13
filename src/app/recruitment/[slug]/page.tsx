@@ -8,6 +8,7 @@ import { configAtom, credentialAtom } from "@/app/atom";
 import { applyRecruitment, getRecruitmentDetail } from "@/app/api/helper";
 import ParticipantsCount from "@/app/components/ParticipantsCount";
 import Capsule from "@/app/components/Capsule";
+import { getColorScheme } from "@/app/target";
 
 export default function Article({ params }: { params: { slug: string } }) {
   const config = useRecoilValue(configAtom);
@@ -58,14 +59,14 @@ export default function Article({ params }: { params: { slug: string } }) {
           <Text>対象者</Text>
         </dt>
         <dd>
-          {data.recruitment.targets.map((title) => (
+          {data.recruitment.targets.map((label) => (
             <Capsule
-              key={title}
-              bg="lightgray"
+              key={label}
+              bg={getColorScheme(label)}
               fontSize="0.8em"
               marginRight="0.5em"
             >
-              <Text>{title}</Text>
+              <Text>{label}</Text>
             </Capsule>
           ))}
         </dd>

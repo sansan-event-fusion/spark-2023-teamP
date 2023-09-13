@@ -2,8 +2,9 @@
 
 import { ReactNode, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { credentialAtom, configAtom } from '@/app/atom';
+import { useSetRecoilState } from 'recoil';
+import { credentialAtom, loginDisabledSelector } from '@/app/state';
+import { useMocked, useSignedIn } from '@/app/state/hooks';
 import { TCredential } from '@/app/type';
 import { getMockData } from '@/app/api/mock';
 
@@ -21,23 +22,23 @@ type Props = { children: ReactNode, disabled?: boolean };
 
 function AuthProvider({ children, disabled }: Props) {
     const path = usePathname();
-    const credential = useRecoilValue(credentialAtom);
+    const signedIn = useSignedIn();
+    const mocked = useMocked();
     const setCredential = useSetRecoilState(credentialAtom);
-    const config = useRecoilValue(configAtom);
-    const setConfig = useSetRecoilState(configAtom);
+    const setLoginDisabled = useSetRecoilState(loginDisabledSelector);
 
     useEffect(() => {
-        setConfig(config => ({ ...config, loginDisabled: !!disabled })); 
+        setLoginDisabled(!!disabled);
     }, [disabled]);
 
     useEffect(() => {
-        if (disabled && config.mocked && !credential) {
+        if (disabled && mocked && !signedIn) {
             const credential = getMockData<TCredential>("credential")!;
             setCredential(credential);
         }
-    }, [disabled, config.mocked, credential]);
+    }, [disabled, mocked, signedIn]);
 
-    if (!disabled && !isPublic(path) && !credential) {
+    if (!disabled && !isPublic(path) && !signedIn) {
         return (
             <pre>サインインしてください。</pre>
         );
