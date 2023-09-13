@@ -22,11 +22,6 @@ function APIClientProvider({ children, mocked }: Props) {
 
     useEffect(() => {
         setConfig(config => ({ ...config, mocked: !!mocked }));
-
-        if (mocked) {
-            const credential = getMockData<TCredential>("credential")!;
-            setCredential(credential);
-        }
     }, [mocked]);
 
     return (
