@@ -15,8 +15,8 @@ export async function recruitmentList(params: type.RecruitmentListParams = undef
     return await requestJson<type.RecruitmentListResponse>("/recruitments", "GET");
 }
 
-export async function recruitmentCreate(params: type.RecruitmentCreateParams = undefined, body: type.RecruitmentCreateBody) {
-    await request("/recruitments", "POST", { body });
+export async function recruitmentCreate(params: type.RecruitmentCreateParams = undefined, form: type.RecruitmentCreateForm) {
+    await request("/recruitments", "POST", { form });
 }
 
 export async function recruitmentDetail(params: type.RecruitmentDetailParams, body: type.RecruitmentDetailBody = undefined) {

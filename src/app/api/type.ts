@@ -48,14 +48,14 @@ export type RecruitmentListResponse = [
 
 export type RecruitmentCreateParams = void;
 
-export type RecruitmentCreateBody = {
+export type RecruitmentCreateForm = {
     title: string,
     description: string,
     area: string,
     peopleLimit: number,
-    targets: {
-        title: string,
-    },
+    targets: string[],
+    userId: number,
+    image: File,
 };
 
 export type RecruitmentCreateResponse = void;

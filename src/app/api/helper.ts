@@ -1,5 +1,5 @@
 import { TArticle, TRecruitment, TRoomMessage } from "../type";
-import { recruitmentList, recruitmentDetail, roomDetail } from "./client";
+import { recruitmentList, recruitmentDetail, recruitmentCreate, roomDetail } from "./client";
 import { resolve } from "./utils";
 
 function resolveImageUrl(url: string|undefined) {
@@ -80,4 +80,26 @@ export async function getRecruitmentDetail(id: number): Promise<TArticle> {
             area: data.recruitment.area
         }
     };
+}
+
+export async function createRecruitment(
+    userId: number,
+    title: string,
+    description: string,
+    area: string,
+    peopleLimit: number,
+    targets: string[],
+    image: File
+) {
+    const params = undefined;
+    const form = {
+        userId,
+        title,
+        description,
+        area,
+        peopleLimit,
+        targets,
+        image
+    };
+    await recruitmentCreate(params, form);
 }
