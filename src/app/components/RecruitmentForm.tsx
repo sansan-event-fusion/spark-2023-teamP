@@ -32,8 +32,6 @@ const RecruitmentForm = () => {
   } = useForm<formInputs>();
 
   const onSubmit = handleSubmit(async (data) => {
-    data.peopleLimit = data.peopleLimit || 1; // TODO
-
     if (config.mocked) {
       console.log("create recruitment");
       console.log({
@@ -87,21 +85,31 @@ const RecruitmentForm = () => {
           />
         </FormControl>
         <FormControl mb={5}>
-          <FormLabel htmlFor="area">対象地域</FormLabel>
-          <Input
-            id="area"
-            {...register("area", {
-              // 後ほどここにバリデーションを追加
-            })}
-          />
-        </FormControl>
-        <FormControl mb={5}>
           <FormLabel htmlFor="targets">対象者</FormLabel>
           <MultiSelect
             id="targets"
             onSelected={(selectedLabel: string[]) => {
               setValue("targets", selectedLabel);
             }}
+          />
+        </FormControl>
+        <FormControl mb={5}>
+          <FormLabel htmlFor="peopleLimit">募集人数</FormLabel>
+          <Input
+            id="peopleLimit"
+            type="number"
+            {...register("peopleLimit", {
+              // 後ほどここにバリデーションを追加
+            })}
+          />
+        </FormControl>
+        <FormControl mb={5}>
+          <FormLabel htmlFor="area">対象地域</FormLabel>
+          <Input
+            id="area"
+            {...register("area", {
+              // 後ほどここにバリデーションを追加
+            })}
           />
         </FormControl>
         <FormControl mb={5}>
