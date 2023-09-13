@@ -2,7 +2,7 @@
 
 import { ReactNode, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { credentialAtom, loginDisabledSelector } from '@/app/state';
 import { useMocked, useSignedIn } from '@/app/state/hooks';
 import { TCredential } from '@/app/type';

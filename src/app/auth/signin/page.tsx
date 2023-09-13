@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form'
-import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import {
     Input,
     Button,
