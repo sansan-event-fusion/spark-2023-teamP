@@ -37,7 +37,40 @@ npm test
 ## サイト構造
 
 - `/` 募集一覧ページ
-  - `/recruitments` 募集作成ページ
+  - `/recruitments/:id` 募集詳細ページ
+  - `/create` 募集作成ページ
   - `/auth`
     - `/auth/signin` sign-inページ
     - `/auth/signup` sign-upページ
+
+## ログイン管理
+
+一般公開ページ以外のページを表示するためには、sign-inページからサインインする必要があります。
+
+### 一般公開ページ
+
+- `/` 募集一覧ページ
+- `/auth/signin` sign-inページ
+- `/auth/signup` sign-upページ
+
+### 無効化
+
+`src/app/providers.tsx`の`AuthProvider`に`disabled=true`を設定してください。
+
+```typescript
+  <AuthProvider disabled={true}>
+    ...
+  </AuthProvider>
+```
+
+## APIモック
+
+フロントエンド開発用に、バックエンドAPI呼び出しのモック機能を実装しています。
+
+モックを有効にするには、`src/app/providers.tsx`の`APIClientProvider`に`mocked={true}`を設定してください。
+
+```typescript
+  <APIClientProvider mocked={true}>
+    ...
+  </APIClientProvider>
+```
