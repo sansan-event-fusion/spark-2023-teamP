@@ -1,4 +1,13 @@
-export type ApiKind = "userDetail" | "userUpdate" | "recruitmentList" | "recruitmentCreate" | "recruitmentDetail" | "recruitmentUpdate" | "recruitmentApply" | "recruitmentSearch" | "roomDetail";
+export type ApiKind =
+  | "userDetail"
+  | "userUpdate"
+  | "recruitmentList"
+  | "recruitmentCreate"
+  | "recruitmentDetail"
+  | "recruitmentUpdate"
+  | "recruitmentApply"
+  | "recruitmentSearch"
+  | "roomDetail";
 
 export type SignInParams = void;
 
@@ -22,28 +31,28 @@ export type SignInResponse = {
 };
 
 export type UserDetailParams = {
-    userId: number,
+  userId: number;
 };
 
 export type UserDetailBody = void;
 
 export type UserDetailResponse = {
-    id: number,
-    name: string,
-    email: string,
-    birthday: Date,
-    introduction: string,
-    encryptedPassword: string,
+  id: number;
+  name: string;
+  email: string;
+  birthday: Date;
+  introduction: string;
+  encryptedPassword: string;
 };
 
 export type UserUpdateParams = {
-    userId: number,
+  userId: number;
 };
 
 export type UserUpdateBody = {
-    name: string,
-    introduction: string,
-    profileImage: string,
+  name: string;
+  introduction: string;
+  profileImage: string;
 };
 
 export type UserUpdateResponse = void;
@@ -82,7 +91,7 @@ export type RecruitmentCreateForm = {
 export type RecruitmentCreateResponse = void;
 
 export type RecruitmentDetailParams = {
-    recruitmentId: number,
+  recruitmentId: number;
 };
 
 export type RecruitmentDetailBody = void;
@@ -105,29 +114,29 @@ export type RecruitmentDetailResponse = {
 };
 
 export type RecruitmentUpdateParams = {
-    recruitmentId: number,
+  recruitmentId: number;
 };
 
 export type RecruitmentUpdateBody = {
-    title: string,
-    description: string,
-    area: string,
-    peopleLimit: number,
-    targets: [
-        {
-            title: string,
-        }
-    ],
+  title: string;
+  description: string;
+  area: string;
+  peopleLimit: number;
+  targets: [
+    {
+      title: string;
+    }
+  ];
 };
 
 export type RecruitmentUpdateResponse = void;
 
 export type RecruitmentApplyParams = {
-    recruitmentId: number,
+  recruitmentId: number;
 };
 
 export type RecruitmentApplyBody = {
-    user_id: number,
+  user_id: number;
 };
 
 export type RecruitmentApplyResponse = void;
@@ -135,30 +144,30 @@ export type RecruitmentApplyResponse = void;
 export type RecruitmentSearchParams = void;
 
 export type RecruitmentSearchBody = {
-    keyword: string,
+  keyword: string;
 };
 
 export type RecruitmentSearchResponse = {};
 
 export type RoomDetailParams = {
-    roomId: number,
+  roomId: number;
 };
 
 export type RoomDetailBody = void;
 
 export type RoomDetailResponse = {
-    users: [
-        {
-            id: number,
-            name: string,
-            profileImage: string,
-        }
-    ],
-    messages: [
-        {
-            body: string,
-            user_id: number,
-            created_at: Date,
-        }
-    ],
+  users: [
+    {
+      id: number;
+      name: string;
+      profileImage: string;
+    }
+  ];
+  messages: [
+    {
+      body: string;
+      user_id: number;
+      created_at: Date;
+    }
+  ];
 };
