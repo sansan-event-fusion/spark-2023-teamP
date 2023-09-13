@@ -25,5 +25,3 @@ export function findColorScheme(label: string) {
 }
 
 export default Target;
-Targets;
-FindColorScheme;
