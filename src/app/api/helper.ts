@@ -42,6 +42,7 @@ export async function getRecruitments(): Promise<TRecruitment[]> {
       title,
       targets: [],
       peopleLimit,
+      participantsCount,
       createdAt,
       updatedAt: "",
     })
