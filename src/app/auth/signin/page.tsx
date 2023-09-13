@@ -13,7 +13,7 @@ import {
     Stack
 } from "@/app/components/common";
 import { signin } from '@/app/api/helper';
-import { credentialAtom, configAtom } from '@/app/state';
+import { credentialAtom, mockedSelector } from '@/app/state';
 import { getMockData } from '@/app/api/mock';
 import { TCredential } from '@/app/type';
 
@@ -31,11 +31,11 @@ function SignIn() {
         formState: { errors },
     } = useForm<formInputs>();
 
-    const config = useRecoilValue(configAtom);
+    const mocked = useRecoilValue(mockedSelector);
     const setCredential = useSetRecoilState(credentialAtom);
 
     const onSubmit = handleSubmit(async (data) => {
-        if (config.mocked) {
+        if (mocked) {
             console.log("signin");
             console.log({
                 email: data.email,
