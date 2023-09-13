@@ -1,5 +1,5 @@
 import { selector } from 'recoil';
-import credentialAtom from './credenial';
+import credentialAtom from './credenialAtom';
 import { TUser } from '../type';
 
 const currentUserSelector = selector<TUser|null>({

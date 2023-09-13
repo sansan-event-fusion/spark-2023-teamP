@@ -1,5 +1,5 @@
 import { selector } from 'recoil';
-import credentialAtom from './credenial';
+import credentialAtom from './credenialAtom';
 
 const signedInSelector = selector({
     key: "SignedInSelector",

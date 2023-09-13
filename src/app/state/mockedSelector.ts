@@ -1,5 +1,5 @@
 import { DefaultValue, selector } from 'recoil';
-import configAtom, { defaultConfigValue } from './config';
+import configAtom, { defaultConfigValue } from './configAtom';
 
 const currentUserSelector = selector({
     key: "MockedSelector",
