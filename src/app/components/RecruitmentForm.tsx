@@ -7,7 +7,7 @@ import { FormLabel, FormControl, Input, Button, Box, Textarea } from "./common";
 import MultiSelect from "./MultiSelect";
 import UploadFile from "./UploadFile";
 import { createRecruitment } from "../api/helper";
-import { credentialAtom } from "../atom";
+import { configAtom, credentialAtom } from "../atom";
 
 // フォームで使用する変数の型を定義
 type formInputs = {
@@ -21,7 +21,8 @@ type formInputs = {
 
 const RecruitmentForm = () => {
   const router = useRouter();
-  const currentUser = useRecoilValue(credentialAtom)!;
+  const credential = useRecoilValue(credentialAtom)!;
+  const config = useRecoilValue(configAtom)!;
 
   const {
     handleSubmit,
@@ -31,14 +32,32 @@ const RecruitmentForm = () => {
   } = useForm<formInputs>();
 
   const onSubmit = handleSubmit(async (data) => {
+    if (config.mocked) {
+      console.log("create recruitment");
+      console.log({
+        userId: credential.id,
+        title: data.title,
+        description: data.description,
+        area: data.area,
+        peopleLimit: data.peopleLimit,
+        targets: data.targets,
+        uploadFile: data.uploadFile,
+      });
+
+      router.push("/");
+
+      return;
+    }
+
     await createRecruitment(
-      currentUser.id,
+      credential.id,
       data.title,
       data.description,
       data.area,
       data.peopleLimit,
       data.targets,
       data.uploadFile);
+
     router.push("/");
   });
 
