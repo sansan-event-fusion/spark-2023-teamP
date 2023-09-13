@@ -8,6 +8,10 @@ export function isEmptyObject(obj: any) {
     return Object.keys(obj).length === 0;
 }
 
+export function isEqual(x: any, y: any) {
+    return x == y;
+}
+
 export function resolve(path: string) {
     return `${API_ENDPOINT}${path}`;
 }
