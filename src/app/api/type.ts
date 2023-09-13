@@ -136,7 +136,7 @@ export type RecruitmentApplyParams = {
 };
 
 export type RecruitmentApplyBody = {
-  user_id: number;
+  userId: number;
 };
 
 export type RecruitmentApplyResponse = void;
