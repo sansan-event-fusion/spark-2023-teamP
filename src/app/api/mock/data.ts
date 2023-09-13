@@ -1,5 +1,17 @@
 const Data = [
   {
+    key: "credential",
+    response: {
+      id: 1,
+      name: "みちかず",
+      email: "michikazu@example.com",
+      birthday: new Date("2000/10/3"),
+      introdction: "ハッカソン大好き！",
+      accessToken: "test-access-token",
+      authorization: "Bearer test-JWT"
+    }
+  },
+  {
     key: ["getRecruitments"],
     response: [
       {
