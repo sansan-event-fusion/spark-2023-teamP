@@ -10,6 +10,7 @@ export type TRecruitment = {
   imgUrl: string;
   title: string;
   peopleLimit: number;
+  participantsCount: number;
   createdAt: string;
   updatedAt: string;
 };

@@ -40,6 +40,7 @@ export async function getRecruitments(): Promise<TRecruitment[]> {
         imgUrl: imageUrl,
         title,
         peopleLimit,
+        participantsCount,
         createdAt,
         updatedAt: ""
     }));
