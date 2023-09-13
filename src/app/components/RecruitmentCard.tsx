@@ -2,7 +2,7 @@ import { TRecruitment } from "../type";
 import Capsule from "./Capsule";
 import { Box, Image, Text } from "./common";
 import NextLink from "next/link";
-import { FindColorScheme } from "../target";
+import { findColorScheme } from "../target";
 
 export default function RecruitmentCard({
   recruitment,
@@ -27,7 +27,7 @@ export default function RecruitmentCard({
             {recruitment.targets.map((target) => (
               <Capsule
                 key={target}
-                bg={FindColorScheme(target)}
+                bg={findColorScheme(target)}
                 fontSize="0.8em"
                 marginRight="0.5em"
               >

@@ -1,29 +1,48 @@
-import { TArticle, TRecruitment, TRoomMessage } from "../type";
-import { recruitmentList, recruitmentDetail, roomDetail } from "./client";
+import { TArticle, TRecruitment, TRoomMessage, TCredential } from "../type";
+import * as client from "./client";
+
+export async function signin(
+  email: string,
+  password: string
+): Promise<TCredential> {
+  const params = undefined;
+  const body = { email, password };
+  const data = await client.signin(params, body);
+
+  return {
+    id: data.data.id,
+    email: data.data.email,
+    name: data.data.name,
+    birthday: new Date(data.data.birthday),
+    introduction: data.data.introduction,
+    accessToken: data.accessToken,
+    authorization: data.authorization,
+  };
+}
 
 export async function getRecruitments(): Promise<TRecruitment[]> {
   const params = undefined;
   const body = undefined;
-  const data = await recruitmentList(params, body);
+  const data = await client.recruitmentList(params, body);
 
   return data.map(
     ({
       id,
-      image,
+      imageUrl,
       title,
-      organizer: { name, profileImage },
-      created_at,
+      organizer: { name, profileImageUrl },
+      createdAt,
       peopleLimit,
       participantsCount,
     }) => ({
       id,
       name,
       user_id: 0,
-      imgUrl: "",
+      imgUrl: imageUrl,
       title,
       targets: [],
       peopleLimit,
-      createdAt: created_at.toString(),
+      createdAt,
       updatedAt: "",
     })
   );
@@ -32,7 +51,7 @@ export async function getRecruitments(): Promise<TRecruitment[]> {
 export async function getRoomChat(roomId: number): Promise<TRoomMessage[]> {
   const params = { roomId };
   const body = undefined;
-  const { users, messages } = await roomDetail(params, body);
+  const { users, messages } = await client.roomDetail(params, body);
 
   return messages.map(({ body, user_id, created_at }) => {
     const user = users.find((user) => user.id === user_id);
@@ -56,15 +75,15 @@ export async function getRoomChat(roomId: number): Promise<TRoomMessage[]> {
 export async function getRecruitmentDetail(id: number): Promise<TArticle> {
   const params = { recruitmentId: id };
   const body = undefined;
-  const data = await recruitmentDetail(params, body);
+  const data = await client.recruitmentDetail(params, body);
 
   return {
     user: {
       name: data.organizer.name,
-      profileImageUrl: data.organizer.image,
+      profileImageUrl: data.organizer.imageUrl,
     },
     recruitment: {
-      imageUrl: "",
+      imageUrl: data.recruitment.imageUrl,
       title: data.recruitment.title,
       peopleLimit: data.recruitment.peopleLimit,
       participantsCount: data.recruitment.participantsCount,
@@ -73,4 +92,26 @@ export async function getRecruitmentDetail(id: number): Promise<TArticle> {
       area: data.recruitment.area,
     },
   };
+}
+
+export async function createRecruitment(
+  userId: number,
+  title: string,
+  description: string,
+  area: string,
+  peopleLimit: number,
+  targets: string[],
+  image: File
+) {
+  const params = undefined;
+  const form = {
+    userId,
+    title,
+    description,
+    area,
+    peopleLimit,
+    targets,
+    image,
+  };
+  await client.recruitmentCreate(params, form);
 }
