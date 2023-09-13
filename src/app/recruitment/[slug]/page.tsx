@@ -2,17 +2,17 @@
 
 import UserThumbnail from "@/app/components/UserThumbnail";
 import { useQuery } from "react-query";
-import { useRecoilValue } from "recoil";
 import { Box, Button, Flex, Image, Text } from "../../components/common";
-import { configAtom, credentialAtom } from "@/app/atom";
+import { useMocked, useCurrentUser, useSignedIn } from "@/app/state/hooks";
 import { applyRecruitment, getRecruitmentDetail } from "@/app/api/helper";
 import ParticipantsCount from "@/app/components/ParticipantsCount";
 import Capsule from "@/app/components/Capsule";
 import { getColorScheme } from "@/app/target";
 
 export default function Article({ params }: { params: { slug: string } }) {
-  const config = useRecoilValue(configAtom);
-  const credential = useRecoilValue(credentialAtom);
+  const signedIn = useSignedIn();
+  const mocked = useMocked();
+  const currentUser = useCurrentUser();
 
   let recruitmentId = Number(params.slug);
   const { isLoading, data } = useQuery(["getRecruitmentDetail", recruitmentId], () =>
@@ -24,21 +24,21 @@ export default function Article({ params }: { params: { slug: string } }) {
   }
 
   async function handleApply() {
-    if (!credential) {
+    if (!signedIn) {
       console.log("You are not logged in");
       return;
     }
 
-    if (config.mocked) {
+    if (mocked) {
       console.log("apply");
       console.log({
         recruitmentId: recruitmentId,
-        userId: credential.id
+        userId: currentUser!.id
       });
       return;
     }
 
-    await applyRecruitment(recruitmentId, credential.id);
+    await applyRecruitment(recruitmentId, currentUser!.id);
   }
 
   return (
