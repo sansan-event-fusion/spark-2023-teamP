@@ -78,16 +78,16 @@ const RecruitmentForm = () => {
               setValue("uploadFile", file);
             }}
           />
-          <Button
-            width="100%"
-            mt={7}
-            colorScheme="orange"
-            isLoading={isSubmitting}
-            type="submit"
-          >
-            募集する
-          </Button>
         </FormControl>
+        <Button
+          width="100%"
+          mt={7}
+          colorScheme="orange"
+          isLoading={isSubmitting}
+          type="submit"
+        >
+          募集する
+        </Button>
       </form>
     </Box>
   );

@@ -27,8 +27,8 @@ const MultiSelect = (
     new Target("student", "学生限定", "green"),
     new Target("society", "社会人大歓迎", "red"),
     new Target("Loosely", "ゆるーく", "purple"),
-    new Target("rag", "誰か案ちょうだい", "teal"),
-    new Target("munch", "誰か案ちょうだい", "orange"),
+    new Target("remote", "オンライン", "teal"),
+    new Target("coders", "コーダー大歓迎", "orange"),
   ];
 
   const [selectedTargets, setSelectedTargets] = useState<Target[]>([]);
@@ -75,7 +75,7 @@ const MultiSelect = (
       <Select<Target, true, GroupBase<Target>>
         isMulti
         name="multiSelectOptions"
-        placeholder="複数選択"
+        placeholder="カテゴリを選択"
         options={Targets}
         value={selectedTargets}
         onChange={handleOnChangeSelectedCats}
