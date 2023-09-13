@@ -1,4 +1,4 @@
-const Data = [
+export const Data = [
   {
     key: "credential",
     response: {
@@ -95,7 +95,7 @@ const Data = [
         user: {
           id: 1,
           name: "みちかず",
-          profileImage: "https://placehold.jp/250x150.png"
+          profileImage: "https://placehold.jp/250x150.png",
         },
         body: "応募いただきありがとうございます！！埼玉大学2年生のみちかずです。",
         created_at: new Date("2023-9-10 11:00:00"),
@@ -104,7 +104,7 @@ const Data = [
         user: {
           id: 1,
           name: "みちかず",
-          profileImage: "https://placehold.jp/250x150.png"
+          profileImage: "https://placehold.jp/250x150.png",
         },
         body: "今回のハッカソンで担当したい分野はどこですか？",
         created_at: new Date("2023-9-10 11:01:00"),
@@ -113,12 +113,12 @@ const Data = [
         user: {
           id: 2,
           name: "たかひろ",
-          profileImage: "https://placehold.jp/250x150.png"
+          profileImage: "https://placehold.jp/250x150.png",
         },
         body: "デザインとかやってみたいです。",
         created_at: new Date("2023-9-10 12:00:00"),
       },
-    ]
+    ],
   },
 ];
 
