@@ -30,9 +30,7 @@ export type TArticle = {
     peopleLimit: number,
     participantsCount: number, 
     description: string,
-    targets: {
-        title: string
-    }[],
+    targets: string[],
     area: string
   }
 };

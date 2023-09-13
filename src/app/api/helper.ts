@@ -2,6 +2,12 @@ import { TArticle, TRecruitment, TRoomMessage } from "../type";
 import { recruitmentList, recruitmentDetail, roomDetail } from "./client";
 import { resolve } from "./utils";
 
+function resolveImageUrl(url: string|undefined) {
+    if (!url) return "";
+
+    return resolve(url.slice('/app/public'.length));
+}
+
 export async function getRecruitments(): Promise<TRecruitment[]> {
     const params = undefined;
     const body = undefined;
@@ -22,7 +28,7 @@ export async function getRecruitments(): Promise<TRecruitment[]> {
         id,
         name,
         user_id: 0,
-        imgUrl: resolve(imageUrl.slice('/app/public'.length)),
+        imgUrl: resolveImageUrl(imageUrl),
         title,
         peopleLimit,
         createdAt,
@@ -62,7 +68,7 @@ export async function getRecruitmentDetail(id: number): Promise<TArticle> {
     return {
         user: {
             name: data.organizer.name,
-            profileImageUrl: data.organizer.image
+            profileImageUrl: resolveImageUrl(data.organizer.imageUrl)
         },
         recruitment: {
             imageUrl: "",

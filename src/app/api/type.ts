@@ -70,16 +70,12 @@ export type RecruitmentDetailResponse = {
     organizer: {
         id: number,
         name: string,
-        image: string,
+        imageUrl: string,
     },
     recruitment: {
         area: string,
         title: string,
-        targets: [
-            {
-                title: string,
-            }
-        ],
+        targets: string[],
         description: string,
         peopleLimit: number,
         participantsCount: number,
