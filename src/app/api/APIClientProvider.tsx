@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { useSetRecoilState } from 'recoil';
-import { configAtom } from '@/app/atom';
+import { configAtom } from '@/app/state';
 import { getMockQueryClient } from './mock';
 
 type Props = {

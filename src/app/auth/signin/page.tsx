@@ -13,7 +13,7 @@ import {
     Stack
 } from "@/app/components/common";
 import { signin } from '@/app/api/helper';
-import { credentialAtom, configAtom } from '@/app/atom';
+import { credentialAtom, configAtom } from '@/app/state';
 import { getMockData } from '@/app/api/mock';
 import { TCredential } from '@/app/type';
 

@@ -7,7 +7,7 @@ import { FormLabel, FormControl, Input, Button, Box, Textarea } from "./common";
 import MultiSelect from "./MultiSelect";
 import UploadFile from "./UploadFile";
 import { createRecruitment } from "../api/helper";
-import { configAtom, credentialAtom } from "../atom";
+import { configAtom, credentialAtom } from "../state";
 
 // フォームで使用する変数の型を定義
 type formInputs = {

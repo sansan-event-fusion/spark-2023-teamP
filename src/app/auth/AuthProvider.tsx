@@ -3,7 +3,7 @@
 import { ReactNode, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { credentialAtom, configAtom } from '@/app/atom';
+import { credentialAtom, configAtom } from '@/app/state';
 import { TCredential } from '@/app/type';
 import { getMockData } from '@/app/api/mock';
 
