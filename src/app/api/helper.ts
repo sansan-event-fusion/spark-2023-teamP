@@ -80,7 +80,7 @@ export async function getRecruitmentDetail(id: number): Promise<TArticle> {
             profileImageUrl: data.organizer.imageUrl
         },
         recruitment: {
-            imageUrl: "",
+            imageUrl: data.recruitment.imageUrl,
             title: data.recruitment.title,
             peopleLimit: data.recruitment.peopleLimit,
             participantsCount: data.recruitment.participantsCount, 

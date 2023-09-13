@@ -100,6 +100,7 @@ export type RecruitmentDetailResponse = {
         description: string,
         peopleLimit: number,
         participantsCount: number,
+        imageUrl: string,
     },
 };
 
