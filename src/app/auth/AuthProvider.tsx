@@ -3,7 +3,8 @@
 import { ReactNode, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { credentialAtom, mockedSelector, loginDisabledSelector, signedInSelector } from '@/app/state';
+import { credentialAtom, loginDisabledSelector } from '@/app/state';
+import { useMocked, useSignedIn } from '@/app/state/hooks';
 import { TCredential } from '@/app/type';
 import { getMockData } from '@/app/api/mock';
 
@@ -21,9 +22,9 @@ type Props = { children: ReactNode, disabled?: boolean };
 
 function AuthProvider({ children, disabled }: Props) {
     const path = usePathname();
-    const signedIn = useRecoilValue(signedInSelector);
+    const signedIn = useSignedIn();
+    const mocked = useMocked();
     const setCredential = useSetRecoilState(credentialAtom);
-    const mocked = useRecoilValue(mockedSelector);
     const setLoginDisabled = useSetRecoilState(loginDisabledSelector);
 
     useEffect(() => {

@@ -6,8 +6,8 @@ import { useRecoilValue } from "recoil";
 import { FormLabel, FormControl, Input, Button, Box, Textarea } from "./common";
 import MultiSelect from "./MultiSelect";
 import UploadFile from "./UploadFile";
+import { useMocked, useCurrentUser } from "@/app/state/hooks";
 import { createRecruitment } from "../api/helper";
-import { mockedSelector, currentUserSelector } from "../state";
 
 // フォームで使用する変数の型を定義
 type formInputs = {
@@ -21,8 +21,8 @@ type formInputs = {
 
 const RecruitmentForm = () => {
   const router = useRouter();
-  const currentUser = useRecoilValue(currentUserSelector)!;
-  const mocked = useRecoilValue(mockedSelector);
+  const currentUser = useCurrentUser()!;
+  const mocked = useMocked();
 
   const {
     handleSubmit,
