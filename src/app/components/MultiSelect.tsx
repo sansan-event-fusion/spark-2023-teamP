@@ -27,8 +27,8 @@ const MultiSelect = (
     new Target("student", "学生限定", "green"),
     new Target("society", "社会人大歓迎", "red"),
     new Target("Loosely", "ゆるーく", "purple"),
-    new Target("rag", "誰か案ちょうだい", "teal"),
-    new Target("munch", "誰か案ちょうだい", "orange"),
+    new Target("remote", "オンライン", "teal"),
+    new Target("coders", "コーダー大歓迎", "orange"),
   ];
 
   const [selectedTargets, setSelectedTargets] = useState<Target[]>([]);
