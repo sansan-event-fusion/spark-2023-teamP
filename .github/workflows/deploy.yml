@@ -7,7 +7,7 @@ on:
       - make_docker_file
 jobs:
   build-and-push:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     timeout-minutes: 300
 
     steps:
