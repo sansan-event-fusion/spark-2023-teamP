@@ -1,4 +1,4 @@
-const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT || 'http://localhost:3000';
+import { isEmptyObject, resolve } from "./utils";
 
 export type RequestParams = {
     [key: string]: string | number | boolean;
@@ -11,18 +11,6 @@ export type RequestQuery = {
 export type RequestBody = {
     [key: string]: string | string[] | number | number[] | boolean | boolean[] | RequestBody | RequestBody[];
 };
-
-function isEmptyObject(obj: any) {
-    if (!obj) {
-        return true;
-    }
-
-    return Object.keys(obj).length === 0;
-}
-
-function resolve(path: string) {
-    return `${API_ENDPOINT}${path}`;
-}
 
 function withParams(path: string, params?: RequestParams) {
     if (isEmptyObject(params) || !params) { // !params is needed for type inference
