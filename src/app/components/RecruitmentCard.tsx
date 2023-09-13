@@ -27,7 +27,7 @@ export default function RecruitmentCard({
             {recruitment.targets.map((target) => (
               <Capsule
                 key={target}
-                bg={FindColorScheme(target)}
+                bg={findColorScheme(target)}
                 fontSize="0.8em"
                 marginRight="0.5em"
               >
