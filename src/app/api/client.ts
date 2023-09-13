@@ -54,7 +54,7 @@ export async function recruitmentUpdate(params: type.RecruitmentUpdateParams, bo
 }
 
 export async function recruitmentApply(params: type.RecruitmentApplyParams, body: type.RecruitmentApplyBody) {
-    await request("/recruitments/:recruitmentId/apply", "POST", { params, body });
+    await request("/recruitment/:recruitmentId/apply", "POST", { params, body });
 }
 
 export async function recruitmentSearch(params: type.RecruitmentSearchParams = undefined, body: type.RecruitmentSearchBody) {
