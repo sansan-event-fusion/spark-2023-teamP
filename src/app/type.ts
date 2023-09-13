@@ -1,3 +1,8 @@
+export type TConfig = {
+  mocked: boolean;
+  loginDisabled: boolean;
+};
+
 export type TRecruitment = {
   id: number;
   name: string;
@@ -26,14 +31,25 @@ export type TArticle = {
     profileImageUrl: string;
   };
   recruitment: {
-    imageUrl: string;
-    title: string;
-    peopleLimit: number;
-    participantsCount: number;
-    description: string;
-    targets: {
-      title: string;
-    }[];
-    area: string;
-  };
+    imageUrl: string,
+    title: string,
+    peopleLimit: number,
+    participantsCount: number, 
+    description: string,
+    targets: string[],
+    area: string
+  }
+};
+
+export type TUser = {
+  id: number;
+  name: string;
+  email: string;
+  birthday: Date;
+  introduction: string;
+};
+
+export type TCredential = TUser & {
+  accessToken: string,
+  authorization: string 
 };

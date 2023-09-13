@@ -9,6 +9,27 @@ export type ApiKind =
   | "recruitmentSearch"
   | "roomDetail";
 
+export type SignInParams = void;
+
+export type SignInBody = {
+    email: string,
+    password: string,
+};
+
+export type SignInResponse = {
+    data: {
+        email: string,
+        provider: string,
+        uid: string,
+        profile_image: void,
+        id: number,
+        allow_password_change: boolean,
+        name: string,
+        birthday: string,
+        introduction: string,
+    },
+};
+
 export type UserDetailParams = {
   userId: number;
 };
@@ -41,30 +62,31 @@ export type RecruitmentListParams = void;
 export type RecruitmentListBody = void;
 
 export type RecruitmentListResponse = [
-  {
-    id: number;
-    image: string;
-    title: string;
-    organizer: {
-      name: string;
-      profileImage: string;
-    };
-    created_at: Date;
-    peopleLimit: number;
-    participantsCount: number;
-  }
+    {
+        id: number,
+        imageUrl: string,
+        title: string,
+        organizer: {
+            name: string,
+            profileImageUrl: string
+        },
+        createdAt: string,
+        peopleLimit: number,
+        participantsCount: number,
+    }
 ];
 
 export type RecruitmentCreateParams = void;
 
-export type RecruitmentCreateBody = {
-  title: string;
-  description: string;
-  area: string;
-  peopleLimit: number;
-  targets: {
-    title: string;
-  };
+
+export type RecruitmentCreateForm = {
+    title: string,
+    description: string,
+    area: string,
+    peopleLimit: number,
+    targets: string[],
+    userId: number,
+    image: File,
 };
 
 export type RecruitmentCreateResponse = void;
@@ -76,23 +98,20 @@ export type RecruitmentDetailParams = {
 export type RecruitmentDetailBody = void;
 
 export type RecruitmentDetailResponse = {
-  organizer: {
-    id: number;
-    name: string;
-    image: string;
-  };
-  recruitment: {
-    area: string;
-    title: string;
-    targets: [
-      {
-        title: string;
-      }
-    ];
-    description: string;
-    peopleLimit: number;
-    participantsCount: number;
-  };
+    organizer: {
+        id: number,
+        name: string,
+        imageUrl: string,
+    },
+    recruitment: {
+        area: string,
+        title: string,
+        targets: string[],
+        description: string,
+        peopleLimit: number,
+        participantsCount: number,
+        imageUrl: string,
+    },
 };
 
 export type RecruitmentUpdateParams = {
