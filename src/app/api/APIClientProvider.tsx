@@ -3,9 +3,8 @@
 import React, { useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { useSetRecoilState } from 'recoil';
-import { credentialAtom, configAtom } from '@/app/atom';
-import { TCredential } from '@/app/type';
-import { getMockData, getMockQueryClient } from './mock';
+import { configAtom } from '@/app/atom';
+import { getMockQueryClient } from './mock';
 
 type Props = {
     children: React.ReactNode,
@@ -17,7 +16,6 @@ const mockedQueryClient = getMockQueryClient();
 
 function APIClientProvider({ children, mocked }: Props) {
     const client = mocked ? mockedQueryClient : queryClient;
-    const setCredential = useSetRecoilState(credentialAtom);
     const setConfig = useSetRecoilState(configAtom);
 
     useEffect(() => {
