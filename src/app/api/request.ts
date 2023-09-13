@@ -1,4 +1,4 @@
-import { isEmptyObject, resolve } from "./utils";
+import { isEmptyObject, resolve, checkType } from "./utils";
 
 export type RequestParams = {
     [key: string]: string | number | boolean;
@@ -11,6 +11,10 @@ export type RequestQuery = {
 export type RequestBody = {
     [key: string]: string | string[] | number | number[] | boolean | boolean[] | RequestBody | RequestBody[];
 };
+
+export type RequestForm = {
+    [key: string]: string | string[] | number | number[] | boolean | boolean[] | File;
+}
 
 function withParams(path: string, params?: RequestParams) {
     if (isEmptyObject(params) || !params) { // !params is needed for type inference
@@ -38,8 +42,38 @@ function withQuery(path: string, query?: RequestQuery) {
     return `${path}?${queryString}`;
 }
 
-async function getRequest(path: string, params?: RequestParams, query?: RequestQuery, body?: RequestBody) {
-    if (!isEmptyObject(body)) {
+function convertForm(data: RequestForm) {
+    const formData = new FormData();
+
+    Object.entries(data).map(([key, value]) => {
+        switch (checkType(value)) {
+            case "string":
+            case "number":
+            case "boolean":
+                formData.append(key, value.toString());
+                break;
+            case "string[]":
+            case "number[]":
+            case "boolean[]":
+                (value as any[]).forEach(element => {
+                    formData.append(`key[]`, element.toString()); 
+                });
+                break;
+            case "[]":
+                break;
+            case "File":
+                formData.append(key, (value as File));
+                break;
+            default:
+                throw new Error(`Unsupported type in ${key}`);
+        }
+    });
+
+    return formData;
+}
+
+async function getRequest(path: string, params?: RequestParams, query?: RequestQuery, body?: RequestBody, form?: RequestForm) {
+    if (!isEmptyObject(body) || !isEmptyObject(form)) {
         throw new Error('body is not available in a GET request.');
     }
 
@@ -49,13 +83,16 @@ async function getRequest(path: string, params?: RequestParams, query?: RequestQ
     return await fetch(resolve(path));
 }
 
-async function postRequest(path: string, params?: RequestParams, query?: RequestQuery, body?: RequestBody) {
+async function postRequest(path: string, params?: RequestParams, query?: RequestQuery, body?: RequestBody, form?: RequestForm) {
     path = withParams(path, params);
     path = withQuery(path, query);
 
     let options: RequestInit = {
         method: 'POST',
     }
+    if (!isEmptyObject(body) || !isEmptyObject(form)) {
+        throw new Error('body and form can not be used at the same time.');
+    }
     if (!isEmptyObject(body)) {
         options = {
             ...options,
@@ -65,16 +102,26 @@ async function postRequest(path: string, params?: RequestParams, query?: Request
             body: JSON.stringify(body),
         }
     }
+    if (!isEmptyObject(form)) {
+        options = {
+            ...options,
+            body: convertForm(form!)
+        }
+    }
+
     return await fetch(resolve(path), options);
 }
 
-async function patchRequest(path: string, params?: RequestParams, query?: RequestQuery, body?: RequestBody) {
+async function patchRequest(path: string, params?: RequestParams, query?: RequestQuery, body?: RequestBody, form?: RequestForm) {
     path = withParams(path, params);
     path = withQuery(path, query);
 
     let options: RequestInit = {
         method: 'PATCH',
     }
+    if (!isEmptyObject(body) || !isEmptyObject(form)) {
+        throw new Error('body and form can not be used at the same time.');
+    }
     if (!isEmptyObject(body)) {
         options = {
             ...options,
@@ -84,24 +131,32 @@ async function patchRequest(path: string, params?: RequestParams, query?: Reques
             body: JSON.stringify(body),
         }
     }
+    if (!isEmptyObject(form)) {
+        options = {
+            ...options,
+            body: convertForm(form!)
+        }
+    }
+
     return await fetch(resolve(path), options);
 }
 
 type RequestOptions = {
     params?: RequestParams,
     query?: RequestQuery,
-    body?: RequestBody
-}
+    body?: RequestBody,
+    form?: RequestForm,
+};
 type RequestMethod = "GET" | "POST" | "PATCH";
 
 export async function request(path: string, method: RequestMethod = "GET", options?: RequestOptions) {
     switch (method) {
         case "GET":
-            return await getRequest(path, options?.params, options?.query, options?.body);
+            return await getRequest(path, options?.params, options?.query, options?.body, options?.form);
         case "POST":
-            return await postRequest(path, options?.params, options?.query, options?.body);
+            return await postRequest(path, options?.params, options?.query, options?.body, options?.form);
         case "PATCH":
-            return await patchRequest(path, options?.params, options?.query, options?.body);
+            return await patchRequest(path, options?.params, options?.query, options?.body, options?.form);
     }
 }
 
