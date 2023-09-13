@@ -59,7 +59,7 @@ export type RecruitmentListResponse = [
         title: string,
         organizer: {
             name: string,
-            profileImageUrl: string,
+            profileImageUrl: string
         },
         createdAt: string,
         peopleLimit: number,
