@@ -32,6 +32,8 @@ const RecruitmentForm = () => {
   } = useForm<formInputs>();
 
   const onSubmit = handleSubmit(async (data) => {
+    data.peopleLimit = data.peopleLimit || 1; // TODO
+
     if (config.mocked) {
       console.log("create recruitment");
       console.log({
