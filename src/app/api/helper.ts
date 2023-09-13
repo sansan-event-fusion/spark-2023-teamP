@@ -1,12 +1,5 @@
 import { TArticle, TRecruitment, TRoomMessage, TCredential } from "../type";
 import * as client from "./client";
-import { resolve } from "./utils";
-
-function resolveImageUrl(url: string|undefined) {
-    if (!url) return "";
-
-    return resolve(url.slice('/app/public'.length));
-}
 
 export async function signin(email: string, password: string): Promise<TCredential> {
     const params = undefined;
@@ -44,7 +37,7 @@ export async function getRecruitments(): Promise<TRecruitment[]> {
         id,
         name,
         user_id: 0,
-        imgUrl: resolveImageUrl(imageUrl),
+        imgUrl: imageUrl,
         title,
         peopleLimit,
         createdAt,
@@ -84,7 +77,7 @@ export async function getRecruitmentDetail(id: number): Promise<TArticle> {
     return {
         user: {
             name: data.organizer.name,
-            profileImageUrl: resolveImageUrl(data.organizer.imageUrl)
+            profileImageUrl: data.organizer.imageUrl
         },
         recruitment: {
             imageUrl: "",
