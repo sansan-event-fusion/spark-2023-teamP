@@ -25,7 +25,7 @@ export default function Article({ params }: { params: { slug: string } }) {
 
   async function handleApply() {
     if (!signedIn) {
-      console.log("You are not logged in");
+      console.log("You are not signed in");
       return;
     }
 
