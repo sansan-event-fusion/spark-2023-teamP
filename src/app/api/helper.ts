@@ -92,7 +92,7 @@ export async function getRecruitmentDetail(id: number): Promise<TArticle> {
             peopleLimit: data.recruitment.peopleLimit,
             participantsCount: data.recruitment.participantsCount, 
             description: data.recruitment.description,
-            targets: data.recruitment.targets.map(target => ({ title: target })),
+            targets: data.recruitment.targets,
             area: data.recruitment.area
         }
     };
