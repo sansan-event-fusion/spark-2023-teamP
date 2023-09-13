@@ -56,7 +56,7 @@ function convertForm(data: RequestForm) {
             case "number[]":
             case "boolean[]":
                 (value as any[]).forEach(element => {
-                    formData.append(`key[]`, element.toString()); 
+                    formData.append(`${key}[]`, element.toString()); 
                 });
                 break;
             case "[]":
@@ -74,7 +74,7 @@ function convertForm(data: RequestForm) {
 
 async function getRequest(path: string, params?: RequestParams, query?: RequestQuery, body?: RequestBody, form?: RequestForm) {
     if (!isEmptyObject(body) || !isEmptyObject(form)) {
-        throw new Error('body is not available in a GET request.');
+        throw new Error('body and form are not available in a GET request.');
     }
 
     path = withParams(path, params);
@@ -90,7 +90,7 @@ async function postRequest(path: string, params?: RequestParams, query?: Request
     let options: RequestInit = {
         method: 'POST',
     }
-    if (!isEmptyObject(body) || !isEmptyObject(form)) {
+    if (!isEmptyObject(body) && !isEmptyObject(form)) {
         throw new Error('body and form can not be used at the same time.');
     }
     if (!isEmptyObject(body)) {
@@ -119,7 +119,7 @@ async function patchRequest(path: string, params?: RequestParams, query?: Reques
     let options: RequestInit = {
         method: 'PATCH',
     }
-    if (!isEmptyObject(body) || !isEmptyObject(form)) {
+    if (!isEmptyObject(body) && !isEmptyObject(form)) {
         throw new Error('body and form can not be used at the same time.');
     }
     if (!isEmptyObject(body)) {
