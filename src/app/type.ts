@@ -4,6 +4,7 @@ export type TRecruitment = {
   user_id: number;
   imgUrl: string;
   title: string;
+  targets: string[];
   peopleLimit: number;
   createdAt: string;
   updatedAt: string;
@@ -11,28 +12,28 @@ export type TRecruitment = {
 
 export type TRoomMessage = {
   user: {
-    id: number,
-    name: string,
-    profileImage: string
-  }
-  body: string,
-  created_at: Date,
+    id: number;
+    name: string;
+    profileImage: string;
+  };
+  body: string;
+  created_at: Date;
 };
 
 export type TArticle = {
   user: {
-    name: string,
-    profileImageUrl: string
-  },
+    name: string;
+    profileImageUrl: string;
+  };
   recruitment: {
-    imageUrl: string,
-    title: string,
-    peopleLimit: number,
-    participantsCount: number, 
-    description: string,
+    imageUrl: string;
+    title: string;
+    peopleLimit: number;
+    participantsCount: number;
+    description: string;
     targets: {
-        title: string
-    }[],
-    area: string
-  }
+      title: string;
+    }[];
+    area: string;
+  };
 };
