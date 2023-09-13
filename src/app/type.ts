@@ -1,3 +1,8 @@
+export type TConfig = {
+  mocked: boolean;
+  loginDisabled: boolean;
+};
+
 export type TRecruitment = {
   id: number;
   name: string;
