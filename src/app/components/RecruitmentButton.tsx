@@ -1,8 +1,9 @@
-import { Button, Link } from "./common";
+import { Button } from "./common";
+import NextLink from "next/link";
 
 export default function RecruitmentButton() {
   return (
-    <Link as="a" href="/create">
+    <NextLink href="/create">
       <Button
         position={"fixed"}
         right={5}
@@ -15,6 +16,6 @@ export default function RecruitmentButton() {
       >
         募集する
       </Button>
-    </Link>
+    </NextLink>
   );
 }
