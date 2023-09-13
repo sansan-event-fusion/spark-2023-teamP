@@ -2,6 +2,29 @@ import * as client from "../../app/api/client";
 import { users, recruitments, findById, findBy, recruitment_targets } from "./seeds";
 
 describe("client", () => {
+    describe("auth", () => {
+        it("signin", async () => {
+            const params = undefined;
+            const body = { email: "taisei25864@gmail.com", password: "taisei012" };
+            const data = await client.signin(params, body);
+
+            const user = findBy(users, "email", "taisei25864@gmail.com")[0];
+            const expectData = {
+                data: {
+                    email: user.email,
+                    provider: "email",
+                    uid: user.email,
+                    profile_image: expect.anything(),
+                    id: user.id,
+                    allow_password_change: false,
+                    name: user.name,
+                    birthday: user.birthday,
+                    introduction: user.introduction
+                }
+            };
+            expect(data).toEqual(expectData);
+        });
+    }),
     describe("users", () => {
         it("userDetail", async () => {
             const params = { userId: 1 };
