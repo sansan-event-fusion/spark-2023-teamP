@@ -9,7 +9,7 @@ import AuthProvider from "./auth/AuthProvider";
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <RecoilRoot>
-      <APIClientProvider mocked={false}>
+      <APIClientProvider mocked={true}>
         <AuthProvider disabled={true}>
           <CacheProvider>
             <ChakraProvider>{children}</ChakraProvider>
