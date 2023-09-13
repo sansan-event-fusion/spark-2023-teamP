@@ -11,6 +11,7 @@ export type TRecruitment = {
   title: string;
   targets: string[];
   peopleLimit: number;
+  participantsCount: number;
   createdAt: string;
   updatedAt: string;
 };

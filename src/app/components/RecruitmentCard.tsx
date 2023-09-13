@@ -52,7 +52,7 @@ export default function RecruitmentCard({
               position={"absolute"}
               right={0}
             >
-              {recruitment.peopleLimit} 人が参加中
+              {recruitment.participantsCount} 人が参加中
             </Box>
           </Box>
         </Box>

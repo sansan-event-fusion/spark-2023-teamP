@@ -35,16 +35,18 @@ export async function getRecruitments(): Promise<TRecruitment[]> {
       peopleLimit,
       participantsCount,
     }) => ({
-        id,
-        name,
-        user_id: 0,
-        imgUrl: imageUrl,
-        title,
-        peopleLimit,
-        targets: [],
-        createdAt,
-        updatedAt: ""
-    }));
+      id,
+      name,
+      user_id: 0,
+      imgUrl: imageUrl,
+      title,
+      targets: [],
+      peopleLimit,
+      participantsCount,
+      createdAt,
+      updatedAt: "",
+    })
+  );
 }
 
 export async function getRoomChat(roomId: number): Promise<TRoomMessage[]> {
