@@ -1,3 +1,8 @@
+export type TConfig = {
+  mocked: boolean;
+  loginDisabled: boolean;
+};
+
 export type TRecruitment = {
   id: number;
   name: string;
@@ -30,9 +35,7 @@ export type TArticle = {
     peopleLimit: number,
     participantsCount: number, 
     description: string,
-    targets: {
-        title: string
-    }[],
+    targets: string[],
     area: string
   }
 };

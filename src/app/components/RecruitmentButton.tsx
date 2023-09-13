@@ -2,7 +2,7 @@ import { Button, Link } from "./common";
 
 export default function RecruitmentButton() {
   return (
-    <Link as="a" href="/recruitment">
+    <Link as="a" href="/create">
       <Button
         position={"fixed"}
         right={5}

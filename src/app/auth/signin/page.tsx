@@ -1,7 +1,8 @@
 "use client";
 
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form'
-import { useSetRecoilState } from 'recoil';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 import {
     Input,
     Button,
@@ -12,8 +13,9 @@ import {
     Stack
 } from "@/app/components/common";
 import { signin } from '@/app/api/helper';
-import { credentialAtom } from '@/app/atom';
-import { useRouter } from 'next/navigation';
+import { credentialAtom, configAtom } from '@/app/atom';
+import { getMockData } from '@/app/api/mock';
+import { TCredential } from '@/app/type';
 
 type formInputs = {
     email: string;
@@ -29,11 +31,28 @@ function SignIn() {
         formState: { errors },
     } = useForm<formInputs>();
 
+    const config = useRecoilValue(configAtom);
     const setCredential = useSetRecoilState(credentialAtom);
 
     const onSubmit = handleSubmit(async (data) => {
+        if (config.mocked) {
+            console.log("signin");
+            console.log({
+                email: data.email,
+                password: data.password
+            });
+
+            const credential = getMockData<TCredential>("credential")!;
+            setCredential(credential);
+
+            router.push("/");
+
+            return;
+        }
+
         const credential = await signin(data.email, data.password);
         setCredential(credential);
+
         router.push("/");
     });
 

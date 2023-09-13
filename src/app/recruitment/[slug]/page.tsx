@@ -35,7 +35,7 @@ export default function Article({ params }: { params: { slug: string } }) {
           <Text>対象者</Text>
         </dt>
         <dd>
-          {data.recruitment.targets.map(({ title }) => (
+          {data.recruitment.targets.map((title) => (
             <Capsule
               key={title}
               bg="lightgray"

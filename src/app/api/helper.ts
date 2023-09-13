@@ -24,23 +24,23 @@ export async function getRecruitments(): Promise<TRecruitment[]> {
 
     return data.map(({
         id,
-        image,
+        imageUrl,
         title,
         organizer: {
             name,
-            profileImage,
+            profileImageUrl,
         },
-        created_at,
+        createdAt,
         peopleLimit,
         participantsCount,
     }) => ({
         id,
         name,
         user_id: 0,
-        imgUrl: "",
+        imgUrl: imageUrl,
         title,
         peopleLimit,
-        createdAt: created_at.toString(),
+        createdAt,
         updatedAt: ""
     }));
 }
@@ -77,16 +77,38 @@ export async function getRecruitmentDetail(id: number): Promise<TArticle> {
     return {
         user: {
             name: data.organizer.name,
-            profileImageUrl: "",
+            profileImageUrl: data.organizer.imageUrl
         },
         recruitment: {
-            imageUrl: "",
+            imageUrl: data.recruitment.imageUrl,
             title: data.recruitment.title,
             peopleLimit: data.recruitment.peopleLimit,
             participantsCount: data.recruitment.participantsCount, 
             description: data.recruitment.description,
-            targets: data.recruitment.targets.map(target => ({ title: target })),
+            targets: data.recruitment.targets,
             area: data.recruitment.area
         }
     };
+}
+
+export async function createRecruitment(
+    userId: number,
+    title: string,
+    description: string,
+    area: string,
+    peopleLimit: number,
+    targets: string[],
+    image: File
+) {
+    const params = undefined;
+    const form = {
+        userId,
+        title,
+        description,
+        area,
+        peopleLimit,
+        targets,
+        image
+    };
+    await client.recruitmentCreate(params, form);
 }

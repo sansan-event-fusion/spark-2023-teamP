@@ -55,13 +55,13 @@ export type RecruitmentListBody = void;
 export type RecruitmentListResponse = [
     {
         id: number,
-        image: void, // TODO
+        imageUrl: string,
         title: string,
         organizer: {
             name: string,
-            profileImage: void, // TODO
+            profileImageUrl: string
         },
-        created_at: Date,
+        createdAt: string,
         peopleLimit: number,
         participantsCount: number,
     }
@@ -69,12 +69,14 @@ export type RecruitmentListResponse = [
 
 export type RecruitmentCreateParams = void;
 
-export type RecruitmentCreateBody = {
+export type RecruitmentCreateForm = {
     title: string,
     description: string,
     area: string,
     peopleLimit: number,
     targets: string[],
+    userId: number,
+    image: File,
 };
 
 export type RecruitmentCreateResponse = void;
@@ -89,7 +91,7 @@ export type RecruitmentDetailResponse = {
     organizer: {
         id: number,
         name: string,
-        image: void, // TODO
+        imageUrl: string,
     },
     recruitment: {
         area: string,
@@ -98,6 +100,7 @@ export type RecruitmentDetailResponse = {
         description: string,
         peopleLimit: number,
         participantsCount: number,
+        imageUrl: string,
     },
 };
 

@@ -1,5 +1,17 @@
 export const Data = [
   {
+    key: "credential",
+    response: {
+      id: 1,
+      name: "みちかず",
+      email: "michikazu@example.com",
+      birthday: new Date("2000/10/3"),
+      introdction: "ハッカソン大好き！",
+      accessToken: "test-access-token",
+      authorization: "Bearer test-JWT"
+    }
+  },
+  {
     key: ["getRecruitments"],
     response: [
       {
@@ -46,15 +58,10 @@ export const Data = [
         title: "さいたまっこハッカソン一緒にでましょう",
         peopleLimit: 4,
         participantsCount: 3,
-        description:
-          "さいたま市で5/13に開催される「さいたまっこハッカソン」に一緒に参加してくれる人を募集します。私は主にRuby on Railsの経験があり、バックエンドの実装は任せてください！！",
+        description: "さいたま市で5/13に開催される「さいたまっこハッカソン」に一緒に参加してくれる人を募集します。私は主にRuby on Railsの経験があり、バックエンドの実装は任せてください！！",
         targets: [
-          {
-            title: "初心者歓迎",
-          },
-          {
-            title: "楽しく",
-          },
+          "初心者歓迎",
+          "楽しく",
         ],
         area: "さいたま県",
       },
@@ -74,12 +81,8 @@ export const Data = [
         participantsCount: 10,
         description: "Peach.Techみんなこい！",
         targets: [
-          {
-            title: "初心者歓迎",
-          },
-          {
-            title: "楽しく",
-          },
+          "初心者歓迎",
+          "楽しく",
         ],
         area: "成蹊大学",
       },
@@ -116,32 +119,6 @@ export const Data = [
         created_at: new Date("2023-9-10 12:00:00"),
       },
     ],
-  },
-  {
-    key: ["getRecruitmentDetail", 1],
-    response: {
-      user: {
-        name: "みちかず",
-        profileImageUrl: "https://placehold.jp/250x150.png",
-      },
-      recruitment: {
-        imageUrl: "https://placehold.jp/250x150.png",
-        title: "さいたまっこハッカソン一緒にでましょう",
-        peopleLimit: 4,
-        participantsCount: 3,
-        description:
-          "さいたま市で5/13に開催される「さいたまっこハッカソン」に一緒に参加してくれる人を募集します。私は主にRuby on Railsの経験があり、バックエンドの実装は任せてください！！",
-        targets: [
-          {
-            title: "初心者歓迎",
-          },
-          {
-            title: "楽しく",
-          },
-        ],
-        area: "さいたま県",
-      },
-    },
   },
 ];
 
