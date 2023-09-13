@@ -66,8 +66,8 @@ export const Data = [
         participantsCount: 3,
         description: "さいたま市で5/13に開催される「さいたまっこハッカソン」に一緒に参加してくれる人を募集します。私は主にRuby on Railsの経験があり、バックエンドの実装は任せてください！！",
         targets: [
-          "初心者歓迎",
-          "楽しく",
+          "楽しくワイワイ",
+          "がち🔥"
         ],
         area: "さいたま県",
       },
@@ -87,8 +87,7 @@ export const Data = [
         participantsCount: 10,
         description: "Peach.Techみんなこい！",
         targets: [
-          "初心者歓迎",
-          "楽しく",
+          "初心者歓迎"
         ],
         area: "成蹊大学",
       },
