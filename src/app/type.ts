@@ -34,3 +34,16 @@ export type TArticle = {
     area: string
   }
 };
+
+export type TUser = {
+  id: number;
+  name: string;
+  email: string;
+  birthday: Date;
+  introduction: string;
+};
+
+export type TCredential = TUser & {
+  accessToken: string,
+  authorization: string 
+};

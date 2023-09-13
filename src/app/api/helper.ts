@@ -1,5 +1,5 @@
-import { TArticle, TRecruitment, TRoomMessage } from "../type";
-import { recruitmentList, recruitmentDetail, recruitmentCreate, roomDetail } from "./client";
+import { TArticle, TRecruitment, TRoomMessage, TCredential } from "../type";
+import * as client from "./client";
 import { resolve } from "./utils";
 
 function resolveImageUrl(url: string|undefined) {
@@ -8,10 +8,26 @@ function resolveImageUrl(url: string|undefined) {
     return resolve(url.slice('/app/public'.length));
 }
 
+export async function signin(email: string, password: string): Promise<TCredential> {
+    const params = undefined;
+    const body = { email, password };
+    const data = await client.signin(params, body);
+
+    return {
+        id: data.data.id,
+        email: data.data.email,
+        name: data.data.name,
+        birthday: new Date(data.data.birthday),
+        introduction: data.data.introduction,
+        accessToken: data.accessToken,
+        authorization: data.authorization
+    };
+}
+
 export async function getRecruitments(): Promise<TRecruitment[]> {
     const params = undefined;
     const body = undefined;
-    const data = await recruitmentList(params, body);
+    const data = await client.recruitmentList(params, body);
 
     return data.map(({
         id,
@@ -39,7 +55,7 @@ export async function getRecruitments(): Promise<TRecruitment[]> {
 export async function getRoomChat(roomId: number): Promise<TRoomMessage[]> {
     const params = { roomId };
     const body = undefined;
-    const { users, messages } = await roomDetail(params, body);
+    const { users, messages } = await client.roomDetail(params, body);
 
     return messages.map(({ body, user_id, created_at }) => {
         const user = users.find((user) => user.id === user_id);
@@ -63,7 +79,7 @@ export async function getRoomChat(roomId: number): Promise<TRoomMessage[]> {
 export async function getRecruitmentDetail(id: number): Promise<TArticle> {
     const params = { recruitmentId: id };
     const body = undefined;
-    const data = await recruitmentDetail(params, body);
+    const data = await client.recruitmentDetail(params, body);
 
     return {
         user: {
@@ -101,5 +117,5 @@ export async function createRecruitment(
         targets,
         image
     };
-    await recruitmentCreate(params, form);
+    await client.recruitmentCreate(params, form);
 }
