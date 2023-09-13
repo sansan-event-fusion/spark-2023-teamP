@@ -116,3 +116,9 @@ export async function createRecruitment(
   };
   await client.recruitmentCreate(params, form);
 }
+
+export async function applyRecruitment(recruitmentId: number, userId: number) {
+  const params = { recruitmentId: 1 };
+  const body = { userId: 1 };
+  await client.recruitmentApply(params, body);
+}

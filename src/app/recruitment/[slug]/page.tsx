@@ -2,12 +2,17 @@
 
 import UserThumbnail from "@/app/components/UserThumbnail";
 import { useQuery } from "react-query";
+import { useRecoilValue } from "recoil";
 import { Box, Button, Flex, Image, Text } from "../../components/common";
-import { getRecruitmentDetail } from "@/app/api/helper";
+import { configAtom, credentialAtom } from "@/app/atom";
+import { applyRecruitment, getRecruitmentDetail } from "@/app/api/helper";
 import ParticipantsCount from "@/app/components/ParticipantsCount";
 import Capsule from "@/app/components/Capsule";
 
 export default function Article({ params }: { params: { slug: string } }) {
+  const config = useRecoilValue(configAtom);
+  const credential = useRecoilValue(credentialAtom);
+
   let recruitmentId = Number(params.slug);
   const { isLoading, data } = useQuery(["getRecruitmentDetail", recruitmentId], () =>
     getRecruitmentDetail(recruitmentId)
@@ -15,6 +20,24 @@ export default function Article({ params }: { params: { slug: string } }) {
 
   if (isLoading || !data) {
     return <div>Loading...</div>;
+  }
+
+  async function handleApply() {
+    if (!credential) {
+      console.log("You are not logged in");
+      return;
+    }
+
+    if (config.mocked) {
+      console.log("apply");
+      console.log({
+        recruitmentId: recruitmentId,
+        userId: credential.id
+      });
+      return;
+    }
+
+    await applyRecruitment(recruitmentId, credential.id);
   }
 
   return (
@@ -59,7 +82,7 @@ export default function Article({ params }: { params: { slug: string } }) {
           <Text>{data.recruitment.area}</Text>
         </dd>
       </dl>
-      <Button bg="#ff9900" color="white" width="100%" marginTop="1em">
+      <Button onClick={handleApply} bg="#ff9900" color="white" width="100%" marginTop="1em">
         応募する
       </Button>
     </Box>
