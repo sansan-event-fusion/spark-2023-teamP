@@ -78,7 +78,6 @@ export type RecruitmentListResponse = [
 
 export type RecruitmentCreateParams = void;
 
-
 export type RecruitmentCreateForm = {
     title: string,
     description: string,
