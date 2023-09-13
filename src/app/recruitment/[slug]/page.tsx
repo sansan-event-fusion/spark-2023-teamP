@@ -8,9 +8,9 @@ import ParticipantsCount from "@/app/components/ParticipantsCount";
 import Capsule from "@/app/components/Capsule";
 
 export default function Article({ params }: { params: { slug: string } }) {
-  let slug = Number(params.slug);
-  const { isLoading, data } = useQuery(["getRecruitmentDetail", slug], () =>
-    getRecruitmentDetail(slug)
+  let recruitmentId = Number(params.slug);
+  const { isLoading, data } = useQuery(["getRecruitmentDetail", recruitmentId], () =>
+    getRecruitmentDetail(recruitmentId)
   );
 
   if (isLoading || !data) {
