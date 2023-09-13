@@ -8,6 +8,7 @@ export async function userDetail(params: type.UserDetailParams, body: type.UserD
 }
 
 export async function userUpdate(params: type.UserUpdateParams, body: type.UserUpdateBody) {
+    throw new Error("Api not implemented");
     await request("/users/:userId", "PATCH", { params, body });
 }
 
@@ -24,6 +25,7 @@ export async function recruitmentDetail(params: type.RecruitmentDetailParams, bo
 }
 
 export async function recruitmentUpdate(params: type.RecruitmentUpdateParams, body: type.RecruitmentUpdateBody) {
+    throw new Error("Api not implemented");
     await request("/recruitments/:recruitmentId", "PATCH", { params, body });
 }
 
@@ -32,9 +34,11 @@ export async function recruitmentApply(params: type.RecruitmentApplyParams, body
 }
 
 export async function recruitmentSearch(params: type.RecruitmentSearchParams = undefined, body: type.RecruitmentSearchBody) {
+    throw new Error("Api not implemented");
     await requestJson<type.RecruitmentSearchResponse>("/recruitments/search", "GET", { body });
 }
 
 export async function roomDetail(params: type.RoomDetailParams, body: type.RoomDetailBody = undefined) {
+    throw new Error("Api not implemented");
     return await requestJson<type.RoomDetailResponse>("/rooms/:roomId", "GET", { params });
 }
