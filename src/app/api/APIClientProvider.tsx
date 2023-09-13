@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { useSetRecoilState } from 'recoil';
-import { configAtom } from '@/app/atom';
+import { mockedSelector } from '@/app/state';
 import { getMockQueryClient } from './mock';
 
 type Props = {
@@ -16,10 +16,10 @@ const mockedQueryClient = getMockQueryClient();
 
 function APIClientProvider({ children, mocked }: Props) {
     const client = mocked ? mockedQueryClient : queryClient;
-    const setConfig = useSetRecoilState(configAtom);
+    const setMocked = useSetRecoilState(mockedSelector);
 
     useEffect(() => {
-        setConfig(config => ({ ...config, mocked: !!mocked }));
+        setMocked(!!mocked);
     }, [mocked]);
 
     return (

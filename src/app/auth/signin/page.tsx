@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form'
-import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import {
     Input,
     Button,
@@ -13,7 +13,8 @@ import {
     Stack
 } from "@/app/components/common";
 import { signin } from '@/app/api/helper';
-import { credentialAtom, configAtom } from '@/app/atom';
+import { credentialAtom } from '@/app/state';
+import { useMocked } from '@/app/state/hooks';
 import { getMockData } from '@/app/api/mock';
 import { TCredential } from '@/app/type';
 
@@ -31,11 +32,11 @@ function SignIn() {
         formState: { errors },
     } = useForm<formInputs>();
 
-    const config = useRecoilValue(configAtom);
+    const mocked = useMocked();
     const setCredential = useSetRecoilState(credentialAtom);
 
     const onSubmit = handleSubmit(async (data) => {
-        if (config.mocked) {
+        if (mocked) {
             console.log("signin");
             console.log({
                 email: data.email,
