@@ -1,5 +1,6 @@
 import { TArticle, TRecruitment, TRoomMessage } from "../type";
 import { recruitmentList, recruitmentDetail, roomDetail } from "./client";
+import { resolve } from "./utils";
 
 export async function getRecruitments(): Promise<TRecruitment[]> {
     const params = undefined;
@@ -8,23 +9,23 @@ export async function getRecruitments(): Promise<TRecruitment[]> {
 
     return data.map(({
         id,
-        image,
+        imageUrl,
         title,
         organizer: {
             name,
-            profileImage,
+            profileImageUrl,
         },
-        created_at,
+        createdAt,
         peopleLimit,
         participantsCount,
     }) => ({
         id,
         name,
         user_id: 0,
-        imgUrl: "",
+        imgUrl: resolve(imageUrl.slice('/app/public'.length)),
         title,
         peopleLimit,
-        createdAt: created_at.toString(),
+        createdAt,
         updatedAt: ""
     }));
 }

@@ -6,7 +6,7 @@ import APIClientProvider from "./api/APIClientProvider";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <APIClientProvider mocked={true}>
+    <APIClientProvider mocked={false}>
       <CacheProvider>
         <ChakraProvider>{children}</ChakraProvider>
       </CacheProvider>

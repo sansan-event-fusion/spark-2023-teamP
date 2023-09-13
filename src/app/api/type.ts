@@ -34,13 +34,13 @@ export type RecruitmentListBody = void;
 export type RecruitmentListResponse = [
     {
         id: number,
-        image: string,
+        imageUrl: string,
         title: string,
         organizer: {
             name: string,
-            profileImage: string,
+            profileImageUrl: string,
         },
-        created_at: Date,
+        createdAt: string,
         peopleLimit: number,
         participantsCount: number,
     }
