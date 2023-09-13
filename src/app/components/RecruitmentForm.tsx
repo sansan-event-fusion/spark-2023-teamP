@@ -1,8 +1,13 @@
 "use client";
+
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { useRecoilValue } from "recoil";
 import { FormLabel, FormControl, Input, Button, Box, Textarea } from "./common";
 import MultiSelect from "./MultiSelect";
 import UploadFile from "./UploadFile";
+import { createRecruitment } from "../api/helper";
+import { credentialAtom } from "../atom";
 
 // フォームで使用する変数の型を定義
 type formInputs = {
@@ -15,7 +20,9 @@ type formInputs = {
 };
 
 const RecruitmentForm = () => {
-  // React Hook Formでバリデーションやフォームが送信されたときの処理などを書くために必要な
+  const router = useRouter();
+  const currentUser = useRecoilValue(credentialAtom)!;
+
   const {
     handleSubmit,
     register,
@@ -23,10 +30,16 @@ const RecruitmentForm = () => {
     setValue,
   } = useForm<formInputs>();
 
-  // フォームが送信されたときの処理
-  const onSubmit = handleSubmit((data) => {
-    // フォームで入力されたデータをコンソールに表示
-    console.log(data);
+  const onSubmit = handleSubmit(async (data) => {
+    await createRecruitment(
+      currentUser.id,
+      data.title,
+      data.description,
+      data.area,
+      data.peopleLimit,
+      data.targets,
+      data.uploadFile);
+    router.push("/");
   });
 
   return (
