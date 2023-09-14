@@ -32,7 +32,7 @@ export default class Mock {
         return (response as T | undefined);
     }
 
-    setMockData(key: any, response: any) {
+    setMockData<T>(key: any, response: T) {
         const rec = this.data.find(rec => isEqual(rec.key, key));
 
         if (rec) {
