@@ -30,6 +30,24 @@ export type SignInResponse = {
     },
 };
 
+export type ValidateTokenHeaders = {
+    authorization: string,
+};
+
+export type ValidateTokenResponse = {
+    data: {
+        email: string,
+        provider: string,
+        uid: string,
+        profile_image: void,
+        id: number,
+        allow_password_change: boolean,
+        name: string,
+        birthday: string,
+        introduction: string,
+    },
+};
+
 export type UserDetailParams = {
   userId: number;
 };

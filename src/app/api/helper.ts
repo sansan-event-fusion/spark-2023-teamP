@@ -20,6 +20,20 @@ export async function signin(
   };
 }
 
+export async function reSignin(authorization: string): Promise<TCredential> {
+  const headers = { authorization };
+  const data = await client.validateToken(headers);
+
+  return {
+    id: data.data.id,
+    email: data.data.email,
+    name: data.data.name,
+    birthday: new Date(data.data.birthday),
+    introduction: data.data.introduction,
+    authorization: data.authorization,
+  };
+}
+
 export async function getRecruitments(): Promise<TRecruitment[]> {
   const params = undefined;
   const body = undefined;
