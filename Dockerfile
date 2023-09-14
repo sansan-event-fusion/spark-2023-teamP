@@ -33,6 +33,10 @@ FROM deps as build
 
 # Copy the rest of the source files into the image.
 COPY . .
+
+# Set backend url
+ENV NEXT_PUBLIC_API_ENDPOINT https://sf4scvpt9n.us-east-1.awsapprunner.com
+
 # Run the build script.
 RUN npm run build
 
@@ -54,9 +58,6 @@ COPY package.json .
 # the built application from the build stage into the image.
 COPY --from=deps /usr/src/app/node_modules ./node_modules
 COPY --from=build /usr/src/app/.next ./.next
-
-# Set backend url
-ENV NEXT_PUBLIC_API_ENDPOINT https://sf4scvpt9n.us-east-1.awsapprunner.com
 
 # Run the application.
 CMD npm start
