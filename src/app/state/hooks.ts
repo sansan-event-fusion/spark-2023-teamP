@@ -18,3 +18,7 @@ export function useSignedIn() {
 export function useCurrentUser() {
     return useRecoilValue(state.currentUserSelector);
 }
+
+export function useRecruitment() {
+    return useRecoilValue(state.recruitmentAtom);
+}
