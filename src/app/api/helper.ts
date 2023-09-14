@@ -118,7 +118,7 @@ export async function createRecruitment(
 }
 
 export async function applyRecruitment(recruitmentId: number, userId: number) {
-  const params = { recruitmentId: 1 };
-  const body = { userId: 1 };
+  const params = { recruitmentId };
+  const body = { userId };
   await client.recruitmentApply(params, body);
 }
