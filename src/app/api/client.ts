@@ -111,13 +111,12 @@ export async function recruitmentApply(
 
 export async function recruitmentSearch(
   params: type.RecruitmentSearchParams = undefined,
-  body: type.RecruitmentSearchBody
+  query: type.RecruitmentSearchQuery
 ) {
-  throw new Error("Api not implemented");
-  await requestJson<type.RecruitmentSearchResponse>(
+  return await requestJson<type.RecruitmentSearchResponse>(
     "/recruitments/search",
     "GET",
-    { body }
+    { query }
   );
 }
 

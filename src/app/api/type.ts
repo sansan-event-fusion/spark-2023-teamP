@@ -162,11 +162,24 @@ export type RecruitmentApplyResponse = void;
 
 export type RecruitmentSearchParams = void;
 
-export type RecruitmentSearchBody = {
-  keyword: string;
+export type RecruitmentSearchQuery = {
+  keyword?: string;
+  targets?: string[];
 };
 
-export type RecruitmentSearchResponse = {};
+export type RecruitmentSearchResponse = {
+  id: number;
+  imageUrl: string;
+  title: string;
+  targets: string[];
+  organizer: {
+    name: string;
+    profileImageUrl: string;
+  };
+  createdAt: string;
+  peopleLimit: number;
+  participantsCount: number;
+}[];
 
 export type RoomDetailParams = {
   roomId: number;

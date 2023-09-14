@@ -5,7 +5,7 @@ export type RequestParams = {
 };
 
 export type RequestQuery = {
-    [key: string]: string | number | boolean;
+    [key: string]: string | string[] | number | number[] | boolean | boolean[] | undefined;
 };
 
 export type RequestBody = {
@@ -48,7 +48,26 @@ function withQuery(path: string, query?: RequestQuery) {
         return path;
     }
 
-    const queryParamStrings = Object.entries(query).map(([key, value]) => `${key}=${encodeURIComponent(value)}`);
+    let queryParamStrings: string[] = [];
+
+    Object.entries(query).forEach(([key, value]) => {
+        if (value === undefined) {
+            return;
+        }
+
+        if (Array.isArray(value)) {
+            value.forEach(element => {
+                queryParamStrings.push(`${key}[]=${encodeURIComponent(element)}`);
+            });
+        } else {
+            queryParamStrings.push(`${key}=${encodeURIComponent(value)}`);
+        }
+    });
+
+    if (queryParamStrings.length === 0) {
+        return path;
+    }
+
     const queryString = queryParamStrings.join('&');
 
     return `${path}?${queryString}`;

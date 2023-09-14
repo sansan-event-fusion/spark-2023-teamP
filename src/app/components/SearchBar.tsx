@@ -11,13 +11,18 @@ import {
 import { SearchIcon } from "@chakra-ui/icons";
 import MultiSelect from "./MultiSelect";
 import { useForm } from "react-hook-form";
+import { TCondition } from "../type";
 
 type SearchForm = {
-  keywords: string;
+  keyword: string;
   targets: string[];
 };
 
-export default function SearchBar() {
+type Props = {
+  onChange: (data: TCondition) => void;
+};
+
+export default function SearchBar({ onChange }: Props) {
   const {
     handleSubmit,
     register,
@@ -25,10 +30,18 @@ export default function SearchBar() {
     setValue,
   } = useForm<SearchForm>();
 
-  // フォームが送信されたときの処理
   const onSubmit = handleSubmit((data) => {
-    // フォームで入力されたデータをコンソールに表示
-    console.log(data);
+    const { keyword, targets } = data;
+    let condition: TCondition = { keyword, targets };
+
+    if (!condition.keyword || condition.keyword === "") {
+      condition.keyword = undefined;
+    }
+    if (!condition.targets || condition.targets.length === 0) {
+      condition.targets = undefined;
+    }
+
+    onChange(condition);
   });
 
   return (
@@ -36,14 +49,14 @@ export default function SearchBar() {
       <Box>
         <form onSubmit={onSubmit}>
           <FormControl mb={5}>
-            <FormLabel htmlFor="keywords" />
+            <FormLabel htmlFor="keyword" />
             <InputGroup>
               <InputLeftElement pointerEvents="none">
                 <SearchIcon color="gray.300" />
               </InputLeftElement>
               <Input
-                id="keywords"
-                {...register("keywords", {
+                id="keyword"
+                {...register("keyword", {
                   // 後ほどここにバリデーションを追加
                 })}
               />
