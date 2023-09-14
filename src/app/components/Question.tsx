@@ -22,9 +22,23 @@ export default function Question() {
     return <div>Loading...</div>;
   }
 
+  const sortedData = data.sort((a, b) => {
+    return new Date(b.created_at) - new Date(a.created_at);
+  });
+
   return (
-    <Stack spacing={4} maxW={"md"} margin="auto">
-      {data.map(({ body, user, created_at }) => {
+    <Stack
+      spacing={4}
+      margin="auto"
+      padding={3}
+      border={"1px"}
+      borderColor={"#D3D3D3"}
+      borderRadius={10}
+      mt={20}
+      height={"2xl"}
+      overflowY={"auto"}
+    >
+      {sortedData.map(({ body, user, created_at }) => {
         const isSelf = user.id == currentUserId;
 
         return (
