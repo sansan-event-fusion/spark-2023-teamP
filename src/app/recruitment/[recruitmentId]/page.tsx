@@ -133,7 +133,7 @@ export default function Article() {
                 fontSize="0.8em"
                 marginRight="0.5em"
               >
-                <Text>{label}</Text>
+                <Text color={"white"}>{label}</Text>
               </Capsule>
             ))}
           </dd>
