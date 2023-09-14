@@ -21,7 +21,20 @@ export async function signin(
     name: data.data.name,
     birthday: new Date(data.data.birthday),
     introduction: data.data.introduction,
-    accessToken: data.accessToken,
+    authorization: data.authorization,
+  };
+}
+
+export async function reSignin(authorization: string): Promise<TCredential> {
+  const headers = { authorization };
+  const data = await client.validateToken(headers);
+
+  return {
+    id: data.data.id,
+    email: data.data.email,
+    name: data.data.name,
+    birthday: new Date(data.data.birthday),
+    introduction: data.data.introduction,
     authorization: data.authorization,
   };
 }
@@ -112,6 +125,7 @@ export async function getRecruitmentDetail(id: number): Promise<TArticle> {
 
   return {
     user: {
+      id: data.organizer.id,
       name: data.organizer.name,
       profileImageUrl: data.organizer.imageUrl,
     },
@@ -147,4 +161,10 @@ export async function createRecruitment(
     image,
   };
   await client.recruitmentCreate(params, form);
+}
+
+export async function applyRecruitment(recruitmentId: number, userId: number) {
+  const params = { recruitmentId };
+  const body = { userId };
+  await client.recruitmentApply(params, body);
 }

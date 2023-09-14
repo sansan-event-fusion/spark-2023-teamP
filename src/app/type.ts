@@ -38,6 +38,7 @@ export type TQuestionMessage = {
 
 export type TArticle = {
   user: {
+    id: number;
     name: string;
     profileImageUrl: string;
   };
