@@ -1,18 +1,15 @@
 "use client";
 
 import React, { useEffect } from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClientProvider } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import { mockedSelector } from '@/app/state';
-import { getMockQueryClient } from './mock';
+import { queryClient, mockedQueryClient } from './query';
 
 type Props = {
     children: React.ReactNode,
     mocked?: boolean,
 };
-
-const queryClient = new QueryClient();
-const mockedQueryClient = getMockQueryClient();
 
 function APIClientProvider({ children, mocked }: Props) {
     const client = mocked ? mockedQueryClient : queryClient;

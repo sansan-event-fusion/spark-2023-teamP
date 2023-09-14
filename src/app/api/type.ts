@@ -130,6 +130,7 @@ export type RecruitmentDetailResponse = {
     participantsCount: number;
     imageUrl: string;
   };
+  participantIds: number[];
 };
 
 export type RecruitmentUpdateParams = {
@@ -211,18 +212,8 @@ export type QuestionDetailParams = {
 export type QuestionDetailBody = void;
 
 export type QuestionDetailResponse = {
-  users: [
-    {
-      id: number;
-      name: string;
-      profileImage: string;
-    }
-  ];
-  messages: [
-    {
-      body: string;
-      user_id: number;
-      created_at: Date;
-    }
-  ];
+  messages: {
+    body: string;
+    created_at: Date;
+  }[];
 };

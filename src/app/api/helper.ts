@@ -99,21 +99,10 @@ export async function getQuestion(
 ): Promise<TQuestionMessage[]> {
   const params = { recruitmentId };
   const body = undefined;
-  const { users, messages } = await client.questionDetail(params, body);
+  const { messages } = await client.questionDetail(params, body);
 
-  return messages.map(({ body, user_id, created_at }) => {
-    const user = users.find((user) => user.id === user_id);
-
-    if (!user) {
-      throw new Error("user not found");
-    }
-
+  return messages.map(({ body, created_at }) => {
     return {
-      user: {
-        id: user.id,
-        name: user.name,
-        profileImage: user.profileImage,
-      },
       body,
       created_at,
     };
@@ -140,6 +129,7 @@ export async function getRecruitmentDetail(id: number): Promise<TArticle> {
       targets: data.recruitment.targets,
       area: data.recruitment.area,
     },
+    participantIds: data.participantIds,
   };
 }
 

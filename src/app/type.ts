@@ -27,11 +27,6 @@ export type TRoomMessage = {
 };
 
 export type TQuestionMessage = {
-  user: {
-    id: number;
-    name: string;
-    profileImage: string;
-  };
   body: string;
   created_at: Date;
 };
@@ -56,6 +51,7 @@ export type TArticle = {
     targets: string[];
     area: string;
   };
+  participantIds: number[];
 };
 
 export type TUser = {

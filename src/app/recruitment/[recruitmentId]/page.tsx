@@ -1,6 +1,7 @@
 "use client";
 
 import UserThumbnail from "@/app/components/UserThumbnail";
+import APIClientProvider from "@/app/api/APIClientProvider";
 import { useMemo } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useQuery } from "react-query";
@@ -150,8 +151,10 @@ export default function Article() {
             <Text>{data.recruitment.area}</Text>
           </dd>
         </dl>
-        <QuestionBar />
-        <Question />
+        <APIClientProvider mocked={true}>
+          <QuestionBar />
+          <Question />
+        </APIClientProvider>
       </Box>
     </Box>
   );

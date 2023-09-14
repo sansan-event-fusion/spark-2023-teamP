@@ -6,7 +6,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { credentialAtom, loginDisabledSelector } from '@/app/state';
 import { useMocked, useSignedIn } from '@/app/state/hooks';
 import { TCredential } from '@/app/type';
-import { getMockData } from '@/app/api/mock';
+import { getMockData } from '@/app/api/query';
 import { reSignin } from '@/app/api/helper';
 import { matchPath } from '@/app/utils';
 

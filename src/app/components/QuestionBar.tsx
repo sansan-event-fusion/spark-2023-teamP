@@ -7,6 +7,8 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
+import { TQuestionMessage } from "@/app/type";
+import { getMockData, setMockData, mock } from "@/app/api/query";
 
 type QuestionBar = {
   question: string;
@@ -17,12 +19,17 @@ export default function QuestionBar() {
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
+    reset,
   } = useForm<QuestionBar>();
 
-  // フォームが送信されたときの処理
   const onSubmit = handleSubmit((data) => {
-    // フォームで入力されたデータをコンソールに表示
-    console.log(data);
+    const questionMessage: TQuestionMessage = {
+      body: data.question,
+      created_at: new Date()
+    };
+    const prev = getMockData(["getQuestion", 1]) as TQuestionMessage[];
+    setMockData(["getQuestion", 1], [...prev, questionMessage]);
+    reset();
   });
 
   return (
