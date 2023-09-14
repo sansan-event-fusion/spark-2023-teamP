@@ -20,6 +20,20 @@ export async function signin(
   };
 }
 
+export async function reSignin(authorization: string): Promise<TCredential> {
+  const headers = { authorization };
+  const data = await client.validateToken(headers);
+
+  return {
+    id: data.data.id,
+    email: data.data.email,
+    name: data.data.name,
+    birthday: new Date(data.data.birthday),
+    introduction: data.data.introduction,
+    authorization: data.authorization,
+  };
+}
+
 export async function getRecruitments(): Promise<TRecruitment[]> {
   const params = undefined;
   const body = undefined;
@@ -119,7 +133,7 @@ export async function createRecruitment(
 }
 
 export async function applyRecruitment(recruitmentId: number, userId: number) {
-  const params = { recruitmentId: 1 };
-  const body = { userId: 1 };
+  const params = { recruitmentId };
+  const body = { userId };
   await client.recruitmentApply(params, body);
 }
