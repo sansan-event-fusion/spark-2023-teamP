@@ -26,7 +26,7 @@ export default function Article() {
   const currentUser = useCurrentUser();
 
   let recruitmentId = Number(params.recruitmentId);
-  const { isLoading, data } = useQuery(
+  const { isLoading, data, refetch } = useQuery(
     ["getRecruitmentDetail", recruitmentId],
     () => getRecruitmentDetail(recruitmentId)
   );
@@ -35,8 +35,6 @@ export default function Article() {
     if (!data || !currentUser) {
       return false;
     }
-
-    console.log(data);
 
     const isApplier = !!data.participantIds.find(
       (participantId) => participantId === currentUser.id
@@ -56,8 +54,6 @@ export default function Article() {
       return;
     }
 
-    console.log(mocked);
-
     if (mocked) {
       console.log("apply");
       console.log({
@@ -68,6 +64,8 @@ export default function Article() {
     }
 
     await applyRecruitment(recruitmentId, currentUser!.id);
+
+    refetch();
   }
 
   async function handleEnter() {
