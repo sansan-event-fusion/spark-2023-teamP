@@ -8,8 +8,8 @@ export const Data = [
       birthday: new Date("2000/10/3"),
       introdction: "ハッカソン大好き！",
       accessToken: "test-access-token",
-      authorization: "Bearer test-JWT"
-    }
+      authorization: "Bearer test-JWT",
+    },
   },
   {
     key: ["getRecruitments"],
@@ -65,11 +65,9 @@ export const Data = [
         title: "さいたまっこハッカソン一緒にでましょう",
         peopleLimit: 4,
         participantsCount: 3,
-        description: "さいたま市で5/13に開催される「さいたまっこハッカソン」に一緒に参加してくれる人を募集します。私は主にRuby on Railsの経験があり、バックエンドの実装は任せてください！！",
-        targets: [
-          "楽しくワイワイ",
-          "がち🔥"
-        ],
+        description:
+          "さいたま市で5/13に開催される「さいたまっこハッカソン」に一緒に参加してくれる人を募集します。私は主にRuby on Railsの経験があり、バックエンドの実装は任せてください！！",
+        targets: ["楽しくワイワイ", "がち🔥"],
         area: "さいたま県",
       },
     },
@@ -88,9 +86,7 @@ export const Data = [
         peopleLimit: 20,
         participantsCount: 10,
         description: "Peach.Techみんなこい！",
-        targets: [
-          "初心者歓迎"
-        ],
+        targets: ["初心者歓迎"],
         area: "成蹊大学",
       },
     },
@@ -124,6 +120,65 @@ export const Data = [
         },
         body: "デザインとかやってみたいです。",
         created_at: new Date("2023-9-10 12:00:00"),
+      },
+    ],
+  },
+  {
+    key: ["getQuestion", 1],
+    response: [
+      {
+        user: {
+          id: 1,
+          name: "たかぴろ",
+          profileImage: "https://placehold.jp/250x150.png",
+        },
+        body: "ハッカソンの出場経験がないのですが、参加可能なのでしょうか？",
+        created_at: new Date("2023-9-10 11:00:00"),
+      },
+      {
+        user: {
+          id: 2,
+          name: "みちかず",
+          profileImage: "https://placehold.jp/250x150.png",
+        },
+        body: "はい！初心者大歓迎です！githubのアカウントだけ作っていただければ大丈夫です！",
+        created_at: new Date("2023-9-10 11:01:00"),
+      },
+      {
+        user: {
+          id: 3,
+          name: "ぴょんちー",
+          profileImage: "https://placehold.jp/250x150.png",
+        },
+        body: "reactでの実装経験を積みたのですが、フロントエンドの技術は使う予定でしょうか？",
+        created_at: new Date("2023-9-10 12:00:00"),
+      },
+      {
+        user: {
+          id: 2,
+          name: "みちかず",
+          profileImage: "https://placehold.jp/250x150.png",
+        },
+        body: "大丈夫ですよ！自分もreactかけるので一緒に勉強しながらやりましょう！",
+        created_at: new Date("2023-9-10 13:01:00"),
+      },
+      {
+        user: {
+          id: 4,
+          name: "いまむゆせ",
+          profileImage: "https://placehold.jp/250x150.png",
+        },
+        body: "完全オンラインでしょうか？",
+        created_at: new Date("2023-9-10 14:01:00"),
+      },
+      {
+        user: {
+          id: 2,
+          name: "みちかず",
+          profileImage: "https://placehold.jp/250x150.png",
+        },
+        body: "地元が近ければ対面での開発も考えております！",
+        created_at: new Date("2023-9-10 15:01:00"),
       },
     ],
   },
