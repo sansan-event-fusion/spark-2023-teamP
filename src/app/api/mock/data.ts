@@ -56,6 +56,7 @@ export const Data = [
     key: ["getRecruitmentDetail", 1],
     response: {
       user: {
+        id: 1,
         name: "みちかず",
         profileImageUrl: "https://placehold.jp/250x150.png",
       },
@@ -77,6 +78,7 @@ export const Data = [
     key: ["getRecruitmentDetail", 2],
     response: {
       user: {
+        id: 2,
         name: "ゆせゆせ",
         profileImageUrl: "https://placehold.jp/250x150.png",
       },

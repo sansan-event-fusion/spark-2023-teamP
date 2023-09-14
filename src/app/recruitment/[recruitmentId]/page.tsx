@@ -1,6 +1,8 @@
 "use client";
 
 import UserThumbnail from "@/app/components/UserThumbnail";
+import { useMemo } from "react";
+import { useParams, useRouter } from "next/navigation";
 import { useQuery } from "react-query";
 import { Box, Button, Flex, Image, Text } from "../../components/common";
 import { useMocked, useCurrentUser, useSignedIn } from "@/app/state/hooks";
@@ -9,15 +11,39 @@ import ParticipantsCount from "@/app/components/ParticipantsCount";
 import Capsule from "@/app/components/Capsule";
 import { getColorScheme } from "@/app/target";
 
-export default function Article({ params }: { params: { slug: string } }) {
+type Params = {
+  recruitmentId: string
+};
+
+export default function Article() {
+  const params = useParams() as Params;
+  const router = useRouter();
   const signedIn = useSignedIn();
   const mocked = useMocked();
   const currentUser = useCurrentUser();
 
-  let recruitmentId = Number(params.slug);
+  let recruitmentId = Number(params.recruitmentId);
   const { isLoading, data } = useQuery(["getRecruitmentDetail", recruitmentId], () =>
     getRecruitmentDetail(recruitmentId)
   );
+
+  const applied = useMemo(() => {
+    if (!data || !currentUser) {
+      return false;
+    }
+
+    // TODO
+    /*
+      この実装では、ユーザーが募集主である場合にはルームに参加できるが、
+      ユーザーが応募者の場合にはルームに参加できない。
+    */
+    /*
+    return !!data.recruitment.participants.find(
+      (participant) => participant.userId === currentUser.id
+    );
+    */
+    return data.user.id == currentUser.id;
+  }, [currentUser, data]);
 
   if (isLoading || !data) {
     return <div>Loading...</div>;
@@ -39,6 +65,16 @@ export default function Article({ params }: { params: { slug: string } }) {
     }
 
     await applyRecruitment(recruitmentId, currentUser!.id);
+  }
+
+  async function handleEnter() {
+    if (!signedIn) {
+      console.log("You are not signed in");
+      return;
+    } 
+
+    const roomId = 1; // TODO
+    router.push(`/rooms/${roomId}`);
   }
 
   return (
@@ -83,9 +119,15 @@ export default function Article({ params }: { params: { slug: string } }) {
           <Text>{data.recruitment.area}</Text>
         </dd>
       </dl>
-      <Button onClick={handleApply} bg="#ff9900" color="white" width="100%" marginTop="1em">
-        応募する
-      </Button>
+      {applied ? (
+        <Button onClick={handleEnter} disabled={!signedIn} bg="#ff9900" color="white" width="100%" marginTop="1em">
+          ルームを見る
+        </Button>
+      ) : (
+        <Button onClick={handleApply} disabled={!signedIn} bg="#ff9900" color="white" width="100%" marginTop="1em">
+          応募する
+        </Button>
+      )}
     </Box>
   );
 }

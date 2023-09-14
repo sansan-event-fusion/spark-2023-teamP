@@ -94,6 +94,7 @@ export async function getRecruitmentDetail(id: number): Promise<TArticle> {
 
   return {
     user: {
+      id: data.organizer.id,
       name: data.organizer.name,
       profileImageUrl: data.organizer.imageUrl,
     },
