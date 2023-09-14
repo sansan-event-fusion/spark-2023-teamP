@@ -138,7 +138,7 @@ export async function getRecruitmentDetail(id: number): Promise<TArticle> {
       targets: data.recruitment.targets,
       area: data.recruitment.area,
     },
-    prticipantIds: data.participantIds,
+    participantIds: data.participantIds,
   };
 }
 

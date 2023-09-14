@@ -51,7 +51,7 @@ export type TArticle = {
     targets: string[];
     area: string;
   };
-  prticipantIds: number[];
+  participantIds: number[];
 };
 
 export type TUser = {
