@@ -133,56 +133,26 @@ const Data: MockData = [
     key: ["getQuestion", 1],
     response: [
       {
-        user: {
-          id: 1,
-          name: "たかぴろ",
-          profileImage: "https://placehold.jp/250x150.png",
-        },
         body: "ハッカソンの出場経験がないのですが、参加可能なのでしょうか？",
         created_at: new Date("2023-9-10 11:00:00"),
       },
       {
-        user: {
-          id: 2,
-          name: "みちかず",
-          profileImage: "https://placehold.jp/250x150.png",
-        },
         body: "はい！初心者大歓迎です！githubのアカウントだけ作っていただければ大丈夫です！",
         created_at: new Date("2023-9-10 11:01:00"),
       },
       {
-        user: {
-          id: 3,
-          name: "ぴょんちー",
-          profileImage: "https://placehold.jp/250x150.png",
-        },
         body: "reactでの実装経験を積みたのですが、フロントエンドの技術は使う予定でしょうか？",
         created_at: new Date("2023-9-10 12:00:00"),
       },
       {
-        user: {
-          id: 2,
-          name: "みちかず",
-          profileImage: "https://placehold.jp/250x150.png",
-        },
         body: "大丈夫ですよ！自分もreactかけるので一緒に勉強しながらやりましょう！",
         created_at: new Date("2023-9-10 13:01:00"),
       },
       {
-        user: {
-          id: 4,
-          name: "いまむゆせ",
-          profileImage: "https://placehold.jp/250x150.png",
-        },
         body: "完全オンラインでしょうか？",
         created_at: new Date("2023-9-10 14:01:00"),
       },
       {
-        user: {
-          id: 2,
-          name: "みちかず",
-          profileImage: "https://placehold.jp/250x150.png",
-        },
         body: "地元が近ければ対面での開発も考えております！",
         created_at: new Date("2023-9-10 15:01:00"),
       },
