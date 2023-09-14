@@ -32,12 +32,17 @@ export default function Article() {
       return false;
     }
 
+    // TODO
+    /*
+      この実装では、ユーザーが募集主である場合にはルームに参加できるが、
+      ユーザーが応募者の場合にはルームに参加できない。
+    */
     /*
     return !!data.recruitment.participants.find(
       (participant) => participant.userId === currentUser.id
     );
     */
-    return true;
+    return data.user.id == currentUser.id;
   }, [currentUser, data]);
 
   if (isLoading || !data) {
