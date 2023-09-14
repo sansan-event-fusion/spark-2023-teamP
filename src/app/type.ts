@@ -51,6 +51,5 @@ export type TUser = {
 };
 
 export type TCredential = TUser & {
-  accessToken: string,
   authorization: string 
 };
