@@ -12,7 +12,7 @@ import Capsule from "@/app/components/Capsule";
 import { getColorScheme } from "@/app/target";
 
 type Params = {
-  slug: string
+  recruitmentId: string
 };
 
 export default function Article() {
@@ -22,7 +22,7 @@ export default function Article() {
   const mocked = useMocked();
   const currentUser = useCurrentUser();
 
-  let recruitmentId = Number(params.slug);
+  let recruitmentId = Number(params.recruitmentId);
   const { isLoading, data } = useQuery(["getRecruitmentDetail", recruitmentId], () =>
     getRecruitmentDetail(recruitmentId)
   );
