@@ -1,7 +1,7 @@
 "use client";
 
 import UserThumbnail from "@/app/components/UserThumbnail";
-import APIClientProvider from "@/app/api/APIClientProvider";
+import MockedClientProvider from "@/app/api/MockedClientProvider";
 import { useMemo } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useQuery } from "react-query";
@@ -36,17 +36,14 @@ export default function Article() {
       return false;
     }
 
-    // TODO
-    /*
-      この実装では、ユーザーが募集主である場合にはルームに参加できるが、
-      ユーザーが応募者の場合にはルームに参加できない。
-    */
-    /*
-    return !!data.recruitment.participants.find(
-      (participant) => participant.userId === currentUser.id
+    console.log(data);
+
+    const isApplier = !!data.participantIds.find(
+      (participantId) => participantId === currentUser.id
     );
-    */
-    return data.user.id == currentUser.id;
+    const isOwner = (data.user.id == currentUser.id);
+
+    return (isApplier || isOwner);
   }, [currentUser, data]);
 
   if (isLoading || !data) {
@@ -58,6 +55,8 @@ export default function Article() {
       console.log("You are not signed in");
       return;
     }
+
+    console.log(mocked);
 
     if (mocked) {
       console.log("apply");
@@ -84,10 +83,9 @@ export default function Article() {
   return (
     <Box display={"flex"} justifyContent={"center"}>
       <Box margin="auto" width={"90%"}>
-        {applied ? (
+        {signedIn && (applied ? (
           <Button
             onClick={handleEnter}
-            disabled={!signedIn}
             bg="#ff9900"
             color="white"
             width="100%"
@@ -98,7 +96,6 @@ export default function Article() {
         ) : (
           <Button
             onClick={handleApply}
-            disabled={!signedIn}
             bg="#ff9900"
             color="white"
             width="100%"
@@ -106,7 +103,7 @@ export default function Article() {
           >
             応募する
           </Button>
-        )}
+        ))}
         <UserThumbnail user={data.user} margin="0.5em 0" />
         <Image
           src={data.recruitment.imageUrl}
@@ -151,10 +148,10 @@ export default function Article() {
             <Text>{data.recruitment.area}</Text>
           </dd>
         </dl>
-        <APIClientProvider mocked={true}>
+        <MockedClientProvider>
           <QuestionBar />
           <Question />
-        </APIClientProvider>
+        </MockedClientProvider>
       </Box>
     </Box>
   );
