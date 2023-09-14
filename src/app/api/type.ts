@@ -31,21 +31,21 @@ export type SignInResponse = {
 };
 
 export type ValidateTokenHeaders = {
-    authorization: string,
+  authorization: string;
 };
 
 export type ValidateTokenResponse = {
-    data: {
-        email: string,
-        provider: string,
-        uid: string,
-        profile_image: void,
-        id: number,
-        allow_password_change: boolean,
-        name: string,
-        birthday: string,
-        introduction: string,
-    },
+  data: {
+    email: string;
+    provider: string;
+    uid: string;
+    profile_image: void;
+    id: number;
+    allow_password_change: boolean;
+    name: string;
+    birthday: string;
+    introduction: string;
+  };
 };
 
 export type UserDetailParams = {
@@ -173,13 +173,30 @@ export type RoomDetailParams = {
 
 export type RoomDetailBody = void;
 
+export type RoomDetailResponse = {
+  users: [
+    {
+      id: number;
+      name: string;
+      profileImage: string;
+    }
+  ];
+  messages: [
+    {
+      body: string;
+      user_id: number;
+      created_at: Date;
+    }
+  ];
+};
+
 export type QuestionDetailParams = {
   recruitmentId: number;
 };
 
 export type QuestionDetailBody = void;
 
-export type RoomDetailResponse = {
+export type QuestionDetailResponse = {
   users: [
     {
       id: number;

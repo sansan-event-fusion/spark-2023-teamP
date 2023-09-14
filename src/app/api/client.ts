@@ -136,7 +136,11 @@ export async function questionDetail(
   body: type.RoomDetailBody = undefined
 ) {
   throw new Error("Api not implemented");
-  return await requestJson<type.RoomDetailResponse>("/:recruitmentId", "GET", {
-    params,
-  });
+  return await requestJson<type.QuestionDetailResponse>(
+    "/recruitments/:recruitmentId/question",
+    "GET",
+    {
+      params,
+    }
+  );
 }
