@@ -76,6 +76,9 @@ const Data: MockData = [
         targets: ["楽しくワイワイ", "がち🔥"],
         area: "さいたま県",
       },
+      participantIds: [
+        2, 3, 4
+      ],
     },
   },
   {
@@ -95,6 +98,29 @@ const Data: MockData = [
         targets: ["初心者歓迎"],
         area: "成蹊大学",
       },
+      participantIds: [
+        1, 3, 4, 5, 6, 7, 8, 9, 10, 11
+      ],
+    },
+  },
+  {
+    key: ["getRecruitmentDetail", 3],
+    response: {
+      user: {
+        id: 2,
+        name: "ゆせゆせ",
+        profileImageUrl: "https://placehold.jp/250x150.png",
+      },
+      recruitment: {
+        imageUrl: "https://placehold.jp/250x150.png",
+        title: "Peach.Techハッカソン",
+        peopleLimit: 20,
+        participantsCount: 0,
+        description: "Peach.Techみんなこい！",
+        targets: ["初心者歓迎"],
+        area: "成蹊大学",
+      },
+      participantIds: [],
     },
   },
   {

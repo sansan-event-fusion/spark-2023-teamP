@@ -124,7 +124,7 @@ export async function getRecruitmentDetail(id: number): Promise<TArticle> {
       imageUrl: data.recruitment.imageUrl,
       title: data.recruitment.title,
       peopleLimit: data.recruitment.peopleLimit,
-      participantsCount: data.recruitment.participantsCount,
+      participantsCount: data.participantIds.length,
       description: data.recruitment.description,
       targets: data.recruitment.targets,
       area: data.recruitment.area,

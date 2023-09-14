@@ -1,4 +1,4 @@
-import APIClientProvider from "@/app/api/APIClientProvider";
+import MockedClientProvider from "@/app/api/MockedClientProvider";
 
 export default function RoomLayout({
   children,
@@ -6,8 +6,8 @@ export default function RoomLayout({
   children: React.ReactNode;
 }) {
   return (
-    <APIClientProvider mocked={true}>
+    <MockedClientProvider>
         {children}
-    </APIClientProvider>
+    </MockedClientProvider>
   );
 }

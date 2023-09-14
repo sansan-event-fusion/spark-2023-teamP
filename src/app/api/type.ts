@@ -127,7 +127,6 @@ export type RecruitmentDetailResponse = {
     targets: string[];
     description: string;
     peopleLimit: number;
-    participantsCount: number;
     imageUrl: string;
   };
   participantIds: number[];
