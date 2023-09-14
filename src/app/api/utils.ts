@@ -9,7 +9,11 @@ export function isEmptyObject(obj: any) {
 }
 
 export function isEqual(x: any, y: any) {
-    return x == y;
+    try {
+        return JSON.stringify(x) == JSON.stringify(y);
+    } catch (e) {
+        return false;
+    }
 }
 
 export function resolve(path: string) {
