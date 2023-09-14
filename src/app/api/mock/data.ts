@@ -72,7 +72,7 @@ export const Data = [
       },
     },
     participantIds: [
-      2, 3
+      2, 3, 4
     ],
   },
   {
@@ -94,7 +94,7 @@ export const Data = [
       },
     },
     participantIds: [
-      1, 3
+      1, 3, 4, 5, 6, 7, 8, 9, 10, 11
     ],
   },
   {
@@ -109,7 +109,7 @@ export const Data = [
         imageUrl: "https://placehold.jp/250x150.png",
         title: "Peach.Techハッカソン",
         peopleLimit: 20,
-        participantsCount: 10,
+        participantsCount: 0,
         description: "Peach.Techみんなこい！",
         targets: ["初心者歓迎"],
         area: "成蹊大学",
