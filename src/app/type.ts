@@ -36,6 +36,11 @@ export type TQuestionMessage = {
   created_at: Date;
 };
 
+export type TCondition = {
+  keyword: string | undefined;
+  targets: string[] | undefined;
+};
+
 export type TArticle = {
   user: {
     id: number;

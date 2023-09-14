@@ -1,13 +1,16 @@
 "use client";
 
+import { useState } from "react";
 import { useQuery } from "react-query";
 import RecruitmentButton from "./RecruitmentButton";
 import RecruitmentList from "./RecruitmentList";
-import { getRecruitments } from "../api/helper";
+import { getRecruitmentsList } from "../api/helper";
 import SearchBar from "./SearchBar";
+import { TCondition } from "../type";
 
 export default function Recruitment() {
-  const { isLoading, data } = useQuery(["getRecruitments"], getRecruitments);
+  const [condition, setCondition] = useState<TCondition>({ keyword: undefined, targets: undefined });
+  const { isLoading, data } = useQuery(["getRecruitments", condition], () => getRecruitmentsList(condition));
 
   if (isLoading || !data) {
     return <div>Loading...</div>;
@@ -15,7 +18,7 @@ export default function Recruitment() {
 
   return (
     <div>
-      <SearchBar />
+      <SearchBar onChange={setCondition} />
       <RecruitmentList recruitments={data} />
       <RecruitmentButton />
     </div>

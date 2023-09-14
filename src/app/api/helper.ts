@@ -4,6 +4,7 @@ import {
   TRoomMessage,
   TCredential,
   TQuestionMessage,
+  TCondition,
 } from "../type";
 import * as client from "./client";
 
@@ -168,4 +169,42 @@ export async function applyRecruitment(recruitmentId: number, userId: number) {
   const params = { recruitmentId };
   const body = { userId };
   await client.recruitmentApply(params, body);
+}
+
+export async function searchRecruitment(keyword?: string, targets?: string[]): Promise<TRecruitment[]> {
+  const params = undefined;
+  const query = { keyword, targets };
+
+  const data = await client.recruitmentSearch(params, query);
+  return data.map(
+    ({
+      id,
+      imageUrl,
+      title,
+      targets,
+      organizer: { name, profileImageUrl },
+      createdAt,
+      peopleLimit,
+      participantsCount,
+    }) => ({
+      id,
+      name,
+      user_id: 0,
+      imgUrl: imageUrl,
+      title,
+      targets,
+      peopleLimit,
+      participantsCount,
+      createdAt,
+      updatedAt: "",
+    })
+  );
+}
+
+export async function getRecruitmentsList(condition: TCondition): Promise<TRecruitment[]> {
+  if (condition.keyword === undefined && condition.targets === undefined) {
+    return await getRecruitments();
+  }
+
+  return await searchRecruitment(condition.keyword, condition.targets);
 }
