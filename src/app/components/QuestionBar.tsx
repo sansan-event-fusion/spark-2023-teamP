@@ -27,12 +27,12 @@ export default function QuestionBar() {
 
   return (
     <>
-      <Box position={"relative"}>
+      <Box position={"relative"} mt={10}>
         <form onSubmit={onSubmit}>
           <FormControl mb={5}>
             <FormLabel htmlFor="question">匿名質問広場</FormLabel>
             <Textarea
-              rows={15}
+              rows={10}
               placeholder="匿名で主催者に対し、イベントに関する質問を送ることができます。気になったことをコメントしてみましょう！"
               borderRadius={"lg"}
               id="question"

@@ -10,9 +10,11 @@ import { applyRecruitment, getRecruitmentDetail } from "@/app/api/helper";
 import ParticipantsCount from "@/app/components/ParticipantsCount";
 import Capsule from "@/app/components/Capsule";
 import { getColorScheme } from "@/app/target";
+import QuestionBar from "@/app/components/QuestionBar";
+import Question from "@/app/components/Question";
 
 type Params = {
-  recruitmentId: string
+  recruitmentId: string;
 };
 
 export default function Article() {
@@ -23,8 +25,9 @@ export default function Article() {
   const currentUser = useCurrentUser();
 
   let recruitmentId = Number(params.recruitmentId);
-  const { isLoading, data } = useQuery(["getRecruitmentDetail", recruitmentId], () =>
-    getRecruitmentDetail(recruitmentId)
+  const { isLoading, data } = useQuery(
+    ["getRecruitmentDetail", recruitmentId],
+    () => getRecruitmentDetail(recruitmentId)
   );
 
   const applied = useMemo(() => {
@@ -59,7 +62,7 @@ export default function Article() {
       console.log("apply");
       console.log({
         recruitmentId: recruitmentId,
-        userId: currentUser!.id
+        userId: currentUser!.id,
       });
       return;
     }
@@ -71,14 +74,37 @@ export default function Article() {
     if (!signedIn) {
       console.log("You are not signed in");
       return;
-    } 
+    }
 
     const roomId = 1; // TODO
     router.push(`/rooms/${roomId}`);
   }
 
   return (
-    <Box width="375px" margin="auto">
+    <Box margin="auto" width={"90%"}>
+      {applied ? (
+        <Button
+          onClick={handleEnter}
+          disabled={!signedIn}
+          bg="#ff9900"
+          color="white"
+          width="100%"
+          marginTop="1em"
+        >
+          ルームを見る
+        </Button>
+      ) : (
+        <Button
+          onClick={handleApply}
+          disabled={!signedIn}
+          bg="#ff9900"
+          color="white"
+          width="100%"
+          marginTop="1em"
+        >
+          応募する
+        </Button>
+      )}
       <UserThumbnail user={data.user} margin="0.5em 0" />
       <Image src={data.recruitment.imageUrl} alt="Article Image" width="100%" />
       <h1>
@@ -119,15 +145,8 @@ export default function Article() {
           <Text>{data.recruitment.area}</Text>
         </dd>
       </dl>
-      {applied ? (
-        <Button onClick={handleEnter} disabled={!signedIn} bg="#ff9900" color="white" width="100%" marginTop="1em">
-          ルームを見る
-        </Button>
-      ) : (
-        <Button onClick={handleApply} disabled={!signedIn} bg="#ff9900" color="white" width="100%" marginTop="1em">
-          応募する
-        </Button>
-      )}
+      <QuestionBar />
+      <Question />
     </Box>
   );
 }
