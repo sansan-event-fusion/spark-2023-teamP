@@ -70,10 +70,10 @@ export const Data = [
         targets: ["楽しくワイワイ", "がち🔥"],
         area: "さいたま県",
       },
+      participantIds: [
+        2, 3, 4
+      ],
     },
-    participantIds: [
-      2, 3, 4
-    ],
   },
   {
     key: ["getRecruitmentDetail", 2],
@@ -92,10 +92,10 @@ export const Data = [
         targets: ["初心者歓迎"],
         area: "成蹊大学",
       },
+      participantIds: [
+        1, 3, 4, 5, 6, 7, 8, 9, 10, 11
+      ],
     },
-    participantIds: [
-      1, 3, 4, 5, 6, 7, 8, 9, 10, 11
-    ],
   },
   {
     key: ["getRecruitmentDetail", 3],
@@ -114,8 +114,8 @@ export const Data = [
         targets: ["初心者歓迎"],
         area: "成蹊大学",
       },
+      participantIds: [],
     },
-    participantIds: [],
   },
   {
     key: ["getRoomChat", 1],
