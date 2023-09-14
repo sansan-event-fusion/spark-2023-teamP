@@ -7,11 +7,14 @@ import { getRecruitmentDetail } from "@/app/api/helper";
 import ParticipantsCount from "@/app/components/ParticipantsCount";
 import Capsule from "@/app/components/Capsule";
 import { getColorScheme } from "@/app/target";
+import Question from "@/app/components/Question";
+import QuestionBar from "@/app/components/QuestionBar";
 
 export default function Article({ params }: { params: { slug: string } }) {
   let recruitmentId = Number(params.slug);
-  const { isLoading, data } = useQuery(["getRecruitmentDetail", recruitmentId], () =>
-    getRecruitmentDetail(recruitmentId)
+  const { isLoading, data } = useQuery(
+    ["getRecruitmentDetail", recruitmentId],
+    () => getRecruitmentDetail(recruitmentId)
   );
 
   if (isLoading || !data) {
@@ -63,6 +66,10 @@ export default function Article({ params }: { params: { slug: string } }) {
       <Button bg="#ff9900" color="white" width="100%" marginTop="1em">
         応募する
       </Button>
+      <QuestionBar />
+      <Box bg={"gray.100"} mt={20}>
+        <Question />
+      </Box>
     </Box>
   );
 }
