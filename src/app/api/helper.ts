@@ -1,4 +1,10 @@
-import { TArticle, TRecruitment, TRoomMessage, TCredential } from "../type";
+import {
+  TArticle,
+  TRecruitment,
+  TRoomMessage,
+  TCredential,
+  TQuestionMessage,
+} from "../type";
 import * as client from "./client";
 
 export async function signin(
@@ -53,6 +59,32 @@ export async function getRoomChat(roomId: number): Promise<TRoomMessage[]> {
   const params = { roomId };
   const body = undefined;
   const { users, messages } = await client.roomDetail(params, body);
+
+  return messages.map(({ body, user_id, created_at }) => {
+    const user = users.find((user) => user.id === user_id);
+
+    if (!user) {
+      throw new Error("user not found");
+    }
+
+    return {
+      user: {
+        id: user.id,
+        name: user.name,
+        profileImage: user.profileImage,
+      },
+      body,
+      created_at,
+    };
+  });
+}
+
+export async function getQuestion(
+  recruitmentId: number
+): Promise<TQuestionMessage[]> {
+  const params = { recruitmentId };
+  const body = undefined;
+  const { users, messages } = await client.questionDetail(params, body);
 
   return messages.map(({ body, user_id, created_at }) => {
     const user = users.find((user) => user.id === user_id);

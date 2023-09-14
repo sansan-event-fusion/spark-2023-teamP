@@ -26,20 +26,30 @@ export type TRoomMessage = {
   created_at: Date;
 };
 
+export type TQuestionMessage = {
+  user: {
+    id: number;
+    name: string;
+    profileImage: string;
+  };
+  body: string;
+  created_at: Date;
+};
+
 export type TArticle = {
   user: {
     name: string;
     profileImageUrl: string;
   };
   recruitment: {
-    imageUrl: string,
-    title: string,
-    peopleLimit: number,
-    participantsCount: number, 
-    description: string,
-    targets: string[],
-    area: string
-  }
+    imageUrl: string;
+    title: string;
+    peopleLimit: number;
+    participantsCount: number;
+    description: string;
+    targets: string[];
+    area: string;
+  };
 };
 
 export type TUser = {
@@ -51,6 +61,6 @@ export type TUser = {
 };
 
 export type TCredential = TUser & {
-  accessToken: string,
-  authorization: string 
+  accessToken: string;
+  authorization: string;
 };
