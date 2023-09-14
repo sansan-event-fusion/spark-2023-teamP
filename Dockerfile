@@ -55,6 +55,9 @@ COPY package.json .
 COPY --from=deps /usr/src/app/node_modules ./node_modules
 COPY --from=build /usr/src/app/.next ./.next
 
+# Set backend url
+ENV NEXT_PUBLIC_API_ENDPOINT https://sf4scvpt9n.us-east-1.awsapprunner.com
+
 # Run the application.
 CMD npm start
 
