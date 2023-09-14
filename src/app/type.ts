@@ -28,6 +28,7 @@ export type TRoomMessage = {
 
 export type TArticle = {
   user: {
+    id: number;
     name: string;
     profileImageUrl: string;
   };
