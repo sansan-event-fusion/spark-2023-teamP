@@ -15,7 +15,7 @@ import {
 import { signin } from '@/app/api/helper';
 import { credentialAtom } from '@/app/state';
 import { useMocked } from '@/app/state/hooks';
-import { getMockData } from '@/app/api/mock';
+import { getMockData } from '@/app/api/query';
 import { TCredential } from '@/app/type';
 
 type formInputs = {

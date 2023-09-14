@@ -1,4 +1,10 @@
-export const Data = [
+export type MockRec = {
+  key: any;
+  response: any;
+};
+export type MockData = MockRec[];
+
+const Data: MockData = [
   {
     key: "credential",
     response: {
