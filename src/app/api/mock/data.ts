@@ -71,6 +71,9 @@ export const Data = [
         area: "さいたま県",
       },
     },
+    participantIds: [
+      2, 3
+    ],
   },
   {
     key: ["getRecruitmentDetail", 2],
@@ -90,6 +93,29 @@ export const Data = [
         area: "成蹊大学",
       },
     },
+    participantIds: [
+      1, 3
+    ],
+  },
+  {
+    key: ["getRecruitmentDetail", 3],
+    response: {
+      user: {
+        id: 2,
+        name: "ゆせゆせ",
+        profileImageUrl: "https://placehold.jp/250x150.png",
+      },
+      recruitment: {
+        imageUrl: "https://placehold.jp/250x150.png",
+        title: "Peach.Techハッカソン",
+        peopleLimit: 20,
+        participantsCount: 10,
+        description: "Peach.Techみんなこい！",
+        targets: ["初心者歓迎"],
+        area: "成蹊大学",
+      },
+    },
+    participantIds: [],
   },
   {
     key: ["getRoomChat", 1],
