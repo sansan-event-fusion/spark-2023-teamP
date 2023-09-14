@@ -129,6 +129,7 @@ export type RecruitmentDetailResponse = {
     participantsCount: number;
     imageUrl: string;
   };
+  participantIds: number[];
 };
 
 export type RecruitmentUpdateParams = {

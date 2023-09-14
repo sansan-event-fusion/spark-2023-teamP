@@ -51,6 +51,7 @@ export type TArticle = {
     targets: string[];
     area: string;
   };
+  prticipantIds: number[];
 };
 
 export type TUser = {
