@@ -84,6 +84,7 @@ export type RecruitmentListResponse = [
     id: number;
     imageUrl: string;
     title: string;
+    targets: string[];
     organizer: {
       name: string;
       profileImageUrl: string;
