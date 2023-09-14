@@ -89,7 +89,7 @@ function SignIn() {
                         <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
                     )}
                 </FormControl>
-                <Button type="submit">ログイン</Button>
+                <Button type="submit">サインインする</Button>
             </Stack>
         </form>
     )
