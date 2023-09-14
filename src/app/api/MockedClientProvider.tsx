@@ -2,14 +2,12 @@
 
 import React from 'react';
 import { QueryClientProvider } from 'react-query';
-import { getMockQueryClient } from './mock';
+import { mockedQueryClient } from './query';
 
 type Props = {
     children: React.ReactNode,
     mocked?: boolean,
 };
-
-const mockedQueryClient = getMockQueryClient();
 
 function MockedClientProvider({ children }: Props) {
     const client = mockedQueryClient;
