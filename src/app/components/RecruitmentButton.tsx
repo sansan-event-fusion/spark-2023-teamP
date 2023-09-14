@@ -1,9 +1,14 @@
+"use client";
+
 import { Button } from "./common";
 import NextLink from "next/link";
+import { useSignedIn } from "@/app/state/hooks";
 
 export default function RecruitmentButton() {
+  const signedIn = useSignedIn();
+
   return (
-    <NextLink href="/create">
+    <NextLink href={signedIn ? "/create" : "/auth/signin"}>
       <Button
         position={"fixed"}
         right={5}
