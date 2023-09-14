@@ -54,7 +54,7 @@ export default function Article() {
 
   async function handleApply() {
     if (!signedIn) {
-      console.log("You are not signed in");
+      router.push("/auth/signin");
       return;
     }
 
