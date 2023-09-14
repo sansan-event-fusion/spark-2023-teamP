@@ -15,7 +15,6 @@ export async function signin(
     name: data.data.name,
     birthday: new Date(data.data.birthday),
     introduction: data.data.introduction,
-    accessToken: data.accessToken,
     authorization: data.authorization,
   };
 }
