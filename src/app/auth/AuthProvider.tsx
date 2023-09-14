@@ -8,15 +8,17 @@ import { useMocked, useSignedIn } from '@/app/state/hooks';
 import { TCredential } from '@/app/type';
 import { getMockData } from '@/app/api/mock';
 import { reSignin } from '@/app/api/helper';
+import { matchPath } from '@/app/utils';
 
 const publicPaths = [
     '/',
+    '/recruitment/:recruitmentId',
     '/auth/signin',
     '/auth/signup',
 ];
 
 function isPublic(path: string) {
-    return publicPaths.includes(path);
+    return !!publicPaths.find(publicPath => matchPath(path, publicPath));
 }
 
 const CredentialStorageKey = "easeme_credential";
