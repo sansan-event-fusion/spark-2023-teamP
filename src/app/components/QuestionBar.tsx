@@ -19,6 +19,7 @@ export default function QuestionBar() {
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
+    reset,
   } = useForm<QuestionBar>();
 
   const onSubmit = handleSubmit((data) => {
@@ -28,6 +29,7 @@ export default function QuestionBar() {
     };
     const prev = getMockData(["getQuestion", 1]) as TQuestionMessage[];
     setMockData(["getQuestion", 1], [...prev, questionMessage]);
+    reset();
   });
 
   return (
