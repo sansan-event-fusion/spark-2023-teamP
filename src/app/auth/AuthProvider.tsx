@@ -2,11 +2,12 @@
 
 import { ReactNode, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { credentialAtom, loginDisabledSelector } from '@/app/state';
 import { useMocked, useSignedIn } from '@/app/state/hooks';
 import { TCredential } from '@/app/type';
 import { getMockData } from '@/app/api/mock';
+import { reSignin } from '@/app/api/helper';
 import { matchPath } from '@/app/utils';
 
 const publicPaths = [
@@ -20,14 +21,64 @@ function isPublic(path: string) {
     return !!publicPaths.find(publicPath => matchPath(path, publicPath));
 }
 
+const CredentialStorageKey = "easeme_credential";
+
+async function loadCredential(mocked=false) {
+    if (mocked) {
+        return null;
+    }
+
+    const authorization = sessionStorage.getItem(CredentialStorageKey);
+
+    if (authorization) {
+        try {
+            const credential = await reSignin(authorization);
+            return credential;
+        } catch (e) {
+            clearCredential();
+            return null;
+        }
+    }
+
+    return null;
+}
+
+function storeCredential(credential: TCredential) {
+    sessionStorage.setItem(CredentialStorageKey, credential.authorization);
+}
+
+function clearCredential() {
+    sessionStorage.removeItem(CredentialStorageKey);
+}
+
 type Props = { children: ReactNode, disabled?: boolean };
 
 function AuthProvider({ children, disabled }: Props) {
     const path = usePathname();
     const signedIn = useSignedIn();
     const mocked = useMocked();
+    const credential = useRecoilValue(credentialAtom);
     const setCredential = useSetRecoilState(credentialAtom);
     const setLoginDisabled = useSetRecoilState(loginDisabledSelector);
+
+    useEffect(() => {
+        (async () => {
+            if (!signedIn) {
+                const credential = await loadCredential(mocked);
+                if (credential) {
+                    setCredential(credential);
+                }
+            }
+        })();
+    }, []);
+
+    useEffect(() => {
+        if (credential) {
+            storeCredential(credential);
+        } else {
+            clearCredential();
+        }
+    }, [credential]);
 
     useEffect(() => {
         setLoginDisabled(!!disabled);

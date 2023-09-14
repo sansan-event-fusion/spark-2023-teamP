@@ -8,13 +8,22 @@ import {
   Stack,
   VStack
 } from "@/app/components/common";
-import { getRoomChat } from "@/app/api/helper";
+import { useParams } from "next/navigation";
 import { useQuery } from "react-query";
+import { useCurrentUser } from "@/app/state/hooks";
+import { getRoomChat } from "@/app/api/helper";
 import { getShortTime } from "@/app/lib/format";
 
-export default function Room({ params }: { params: { roomId: number } }) {
-  const currentUserId = 2;
-  const { isLoading, data } = useQuery(["getRoomChat", 1], () => getRoomChat(1));
+type Params = {
+  roomId: string
+};
+
+export default function Room() {
+  const params = useParams() as Params;
+  const currentUser = useCurrentUser()!;
+
+  const roomId = Number(params.roomId);
+  const { isLoading, data } = useQuery(["getRoomChat", roomId], () => getRoomChat(roomId));
 
   if (isLoading || !data) {
     return <div>Loading...</div>;
@@ -23,7 +32,7 @@ export default function Room({ params }: { params: { roomId: number } }) {
   return (
     <Stack spacing={4} maxW={"md"} margin="auto">
       {data.map(({ body, user, created_at }) => {
-        const isSelf = user.id == currentUserId;
+        const isSelf = user.id == currentUser.id;
 
         return (
           <Flex

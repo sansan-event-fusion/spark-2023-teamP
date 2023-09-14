@@ -27,6 +27,25 @@ export async function signin(params: type.SignInParams = undefined, body: type.S
     return result;
 }
 
+export async function validateToken(headers: type.ValidateTokenHeaders) {
+    const res = await request("/auth/validate_token", "GET", { headers });
+    const data: type.ValidateTokenResponse = await res.json();
+
+    const accessToken = res.headers.get("access-token");
+    const authorization = res.headers.get("authorization");
+
+    if (!accessToken || !authorization) {
+        throw new Error("Credenial information is not found in headers");
+    }
+
+    const result: type.ValidateTokenResponse & TokenResponse = {
+        ...data,
+        accessToken,
+        authorization
+    };
+    return result;
+}
+
 export async function userDetail(params: type.UserDetailParams, body: type.UserDetailBody = undefined) {
     return await requestJson<type.UserDetailResponse>("/users/:userId", "GET", { params });
 }

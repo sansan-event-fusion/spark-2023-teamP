@@ -28,6 +28,7 @@ export type TRoomMessage = {
 
 export type TArticle = {
   user: {
+    id: number;
     name: string;
     profileImageUrl: string;
   };
@@ -51,6 +52,5 @@ export type TUser = {
 };
 
 export type TCredential = TUser & {
-  accessToken: string,
   authorization: string 
 };
