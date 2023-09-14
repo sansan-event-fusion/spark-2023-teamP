@@ -40,7 +40,7 @@ export default function Question() {
       height={"2xl"}
       overflowY={"auto"}
     >
-      {data.toReversed().map(({ body, created_at }) => {
+      {data.slice().reverse().map(({ body, created_at }) => {
         return (
           <HStack key={created_at.toString()}>
             <Card
