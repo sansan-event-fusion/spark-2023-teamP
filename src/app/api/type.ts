@@ -12,22 +12,40 @@ export type ApiKind =
 export type SignInParams = void;
 
 export type SignInBody = {
-    email: string,
-    password: string,
+  email: string;
+  password: string;
 };
 
 export type SignInResponse = {
-    data: {
-        email: string,
-        provider: string,
-        uid: string,
-        profile_image: void,
-        id: number,
-        allow_password_change: boolean,
-        name: string,
-        birthday: string,
-        introduction: string,
-    },
+  data: {
+    email: string;
+    provider: string;
+    uid: string;
+    profile_image: void;
+    id: number;
+    allow_password_change: boolean;
+    name: string;
+    birthday: string;
+    introduction: string;
+  };
+};
+
+export type ValidateTokenHeaders = {
+  authorization: string;
+};
+
+export type ValidateTokenResponse = {
+  data: {
+    email: string;
+    provider: string;
+    uid: string;
+    profile_image: void;
+    id: number;
+    allow_password_change: boolean;
+    name: string;
+    birthday: string;
+    introduction: string;
+  };
 };
 
 export type UserDetailParams = {
@@ -62,30 +80,30 @@ export type RecruitmentListParams = void;
 export type RecruitmentListBody = void;
 
 export type RecruitmentListResponse = [
-    {
-        id: number,
-        imageUrl: string,
-        title: string,
-        organizer: {
-            name: string,
-            profileImageUrl: string
-        },
-        createdAt: string,
-        peopleLimit: number,
-        participantsCount: number,
-    }
+  {
+    id: number;
+    imageUrl: string;
+    title: string;
+    organizer: {
+      name: string;
+      profileImageUrl: string;
+    };
+    createdAt: string;
+    peopleLimit: number;
+    participantsCount: number;
+  }
 ];
 
 export type RecruitmentCreateParams = void;
 
 export type RecruitmentCreateForm = {
-    title: string,
-    description: string,
-    area: string,
-    peopleLimit: number,
-    targets: string[],
-    userId: number,
-    image: File,
+  title: string;
+  description: string;
+  area: string;
+  peopleLimit: number;
+  targets: string[];
+  userId: number;
+  image: File;
 };
 
 export type RecruitmentCreateResponse = void;
@@ -97,20 +115,20 @@ export type RecruitmentDetailParams = {
 export type RecruitmentDetailBody = void;
 
 export type RecruitmentDetailResponse = {
-    organizer: {
-        id: number,
-        name: string,
-        imageUrl: string,
-    },
-    recruitment: {
-        area: string,
-        title: string,
-        targets: string[],
-        description: string,
-        peopleLimit: number,
-        participantsCount: number,
-        imageUrl: string,
-    },
+  organizer: {
+    id: number;
+    name: string;
+    imageUrl: string;
+  };
+  recruitment: {
+    area: string;
+    title: string;
+    targets: string[];
+    description: string;
+    peopleLimit: number;
+    participantsCount: number;
+    imageUrl: string;
+  };
 };
 
 export type RecruitmentUpdateParams = {
@@ -136,7 +154,7 @@ export type RecruitmentApplyParams = {
 };
 
 export type RecruitmentApplyBody = {
-  user_id: number;
+  userId: number;
 };
 
 export type RecruitmentApplyResponse = void;
@@ -156,6 +174,29 @@ export type RoomDetailParams = {
 export type RoomDetailBody = void;
 
 export type RoomDetailResponse = {
+  users: [
+    {
+      id: number;
+      name: string;
+      profileImage: string;
+    }
+  ];
+  messages: [
+    {
+      body: string;
+      user_id: number;
+      created_at: Date;
+    }
+  ];
+};
+
+export type QuestionDetailParams = {
+  recruitmentId: number;
+};
+
+export type QuestionDetailBody = void;
+
+export type QuestionDetailResponse = {
   users: [
     {
       id: number;

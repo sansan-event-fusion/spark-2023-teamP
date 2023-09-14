@@ -8,33 +8,41 @@ import {
   Stack,
   VStack,
 } from "@/app/components/common";
-import { useParams } from "next/navigation";
+import { getQuestion, getRoomChat } from "@/app/api/helper";
 import { useQuery } from "react-query";
-import { useCurrentUser } from "@/app/state/hooks";
-import { getRoomChat } from "@/app/api/helper";
 import { getShortTime } from "@/app/lib/format";
 
-type Params = {
-  roomId: string;
-};
-
-export default function Room() {
-  const params = useParams() as Params;
-  const currentUser = useCurrentUser()!;
-
-  const roomId = Number(params.roomId);
-  const { isLoading, data } = useQuery(["getRoomChat", roomId], () =>
-    getRoomChat(roomId)
+export default function Question() {
+  const currentUserId = 2;
+  const { isLoading, data } = useQuery(["getQuestion", 1], () =>
+    getQuestion(1)
   );
 
   if (isLoading || !data) {
     return <div>Loading...</div>;
   }
 
+  // 算術演算の左辺には、'any' 型、'number' 型、'bigint' 型、または列挙型を指定する必要があります。ts(2362)
+  // 上のエラー出てて以下のコードが引っかかりCI通らないので一旦コメントアウトします(必須機能ではないため)
+
+  // const sortedData = data.sort((a, b) => {
+  //   return new Date(b.created_at) - new Date(a.created_at);
+  // });
+
   return (
-    <Stack spacing={4} w={"90%"} margin="auto">
+    <Stack
+      spacing={4}
+      margin="auto"
+      padding={3}
+      border={"1px"}
+      borderColor={"#D3D3D3"}
+      borderRadius={10}
+      mt={20}
+      height={"2xl"}
+      overflowY={"auto"}
+    >
       {data.map(({ body, user, created_at }) => {
-        const isSelf = user.id == currentUser.id;
+        const isSelf = user.id == currentUserId;
 
         return (
           <Flex

@@ -14,7 +14,19 @@ export type RequestBody = {
 
 export type RequestForm = {
     [key: string]: string | string[] | number | number[] | boolean | boolean[] | File;
-}
+};
+
+export type RequestHeaders = {
+    [key: string]: string;
+};
+
+type RequestOptions = {
+    params?: RequestParams,
+    query?: RequestQuery,
+    body?: RequestBody,
+    form?: RequestForm,
+    headers?: RequestHeaders,
+};
 
 function withParams(path: string, params?: RequestParams) {
     if (isEmptyObject(params) || !params) { // !params is needed for type inference
@@ -72,7 +84,9 @@ function convertForm(data: RequestForm) {
     return formData;
 }
 
-async function getRequest(path: string, params?: RequestParams, query?: RequestQuery, body?: RequestBody, form?: RequestForm) {
+async function getRequest(path: string, requestOptions: RequestOptions) {
+    const { params, query, body, form, headers } = requestOptions;
+
     if (!isEmptyObject(body) || !isEmptyObject(form)) {
         throw new Error('body and form are not available in a GET request.');
     }
@@ -80,10 +94,16 @@ async function getRequest(path: string, params?: RequestParams, query?: RequestQ
     path = withParams(path, params);
     path = withQuery(path, query);
 
-    return await fetch(resolve(path));
+    const options: RequestInit = {
+        headers
+    };
+
+    return await fetch(resolve(path), options);
 }
 
-async function postRequest(path: string, params?: RequestParams, query?: RequestQuery, body?: RequestBody, form?: RequestForm) {
+async function postRequest(path: string, requestOptions: RequestOptions) {
+    const { params, query, body, form, headers } = requestOptions;
+
     path = withParams(path, params);
     path = withQuery(path, query);
 
@@ -109,10 +129,17 @@ async function postRequest(path: string, params?: RequestParams, query?: Request
         }
     }
 
+    options.headers = {
+        ...headers,
+        ...options.headers,
+    };
+
     return await fetch(resolve(path), options);
 }
 
-async function patchRequest(path: string, params?: RequestParams, query?: RequestQuery, body?: RequestBody, form?: RequestForm) {
+async function patchRequest(path: string, requestOptions: RequestOptions) {
+    const { params, query, body, form, headers } = requestOptions;
+
     path = withParams(path, params);
     path = withQuery(path, query);
 
@@ -138,29 +165,28 @@ async function patchRequest(path: string, params?: RequestParams, query?: Reques
         }
     }
 
+    options.headers = {
+        ...headers,
+        ...options.headers,
+    };
+
     return await fetch(resolve(path), options);
 }
 
-type RequestOptions = {
-    params?: RequestParams,
-    query?: RequestQuery,
-    body?: RequestBody,
-    form?: RequestForm,
-};
 type RequestMethod = "GET" | "POST" | "PATCH";
 
-export async function request(path: string, method: RequestMethod = "GET", options?: RequestOptions) {
+export async function request(path: string, method: RequestMethod = "GET", options: RequestOptions = {}) {
     switch (method) {
         case "GET":
-            return await getRequest(path, options?.params, options?.query, options?.body, options?.form);
+            return await getRequest(path, options);
         case "POST":
-            return await postRequest(path, options?.params, options?.query, options?.body, options?.form);
+            return await postRequest(path, options);
         case "PATCH":
-            return await patchRequest(path, options?.params, options?.query, options?.body, options?.form);
+            return await patchRequest(path, options);
     }
 }
 
-export async function requestJson<T>(path: string, method: RequestMethod = "GET", options?: RequestOptions): Promise<T> {
+export async function requestJson<T>(path: string, method: RequestMethod = "GET", options: RequestOptions = {}): Promise<T> {
     const res = await request(path, method, options);
     const json = await res.json();
     return json;

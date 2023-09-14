@@ -1,4 +1,10 @@
-import { TArticle, TRecruitment, TRoomMessage, TCredential } from "../type";
+import {
+  TArticle,
+  TRecruitment,
+  TRoomMessage,
+  TCredential,
+  TQuestionMessage,
+} from "../type";
 import * as client from "./client";
 
 export async function signin(
@@ -15,7 +21,20 @@ export async function signin(
     name: data.data.name,
     birthday: new Date(data.data.birthday),
     introduction: data.data.introduction,
-    accessToken: data.accessToken,
+    authorization: data.authorization,
+  };
+}
+
+export async function reSignin(authorization: string): Promise<TCredential> {
+  const headers = { authorization };
+  const data = await client.validateToken(headers);
+
+  return {
+    id: data.data.id,
+    email: data.data.email,
+    name: data.data.name,
+    birthday: new Date(data.data.birthday),
+    introduction: data.data.introduction,
     authorization: data.authorization,
   };
 }
@@ -73,6 +92,32 @@ export async function getRoomChat(roomId: number): Promise<TRoomMessage[]> {
   });
 }
 
+export async function getQuestion(
+  recruitmentId: number
+): Promise<TQuestionMessage[]> {
+  const params = { recruitmentId };
+  const body = undefined;
+  const { users, messages } = await client.questionDetail(params, body);
+
+  return messages.map(({ body, user_id, created_at }) => {
+    const user = users.find((user) => user.id === user_id);
+
+    if (!user) {
+      throw new Error("user not found");
+    }
+
+    return {
+      user: {
+        id: user.id,
+        name: user.name,
+        profileImage: user.profileImage,
+      },
+      body,
+      created_at,
+    };
+  });
+}
+
 export async function getRecruitmentDetail(id: number): Promise<TArticle> {
   const params = { recruitmentId: id };
   const body = undefined;
@@ -80,6 +125,7 @@ export async function getRecruitmentDetail(id: number): Promise<TArticle> {
 
   return {
     user: {
+      id: data.organizer.id,
       name: data.organizer.name,
       profileImageUrl: data.organizer.imageUrl,
     },
@@ -115,4 +161,10 @@ export async function createRecruitment(
     image,
   };
   await client.recruitmentCreate(params, form);
+}
+
+export async function applyRecruitment(recruitmentId: number, userId: number) {
+  const params = { recruitmentId };
+  const body = { userId };
+  await client.recruitmentApply(params, body);
 }
