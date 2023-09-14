@@ -15,6 +15,7 @@ export async function signin(
     name: data.data.name,
     birthday: new Date(data.data.birthday),
     introduction: data.data.introduction,
+    accessToken: data.accessToken,
     authorization: data.authorization,
   };
 }
@@ -128,4 +129,10 @@ export async function createRecruitment(
     image,
   };
   await client.recruitmentCreate(params, form);
+}
+
+export async function applyRecruitment(recruitmentId: number, userId: number) {
+  const params = { recruitmentId };
+  const body = { userId };
+  await client.recruitmentApply(params, body);
 }

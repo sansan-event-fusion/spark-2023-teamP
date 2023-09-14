@@ -3,12 +3,17 @@
 import UserThumbnail from "@/app/components/UserThumbnail";
 import { useQuery } from "react-query";
 import { Box, Button, Flex, Image, Text } from "../../components/common";
-import { getRecruitmentDetail } from "@/app/api/helper";
+import { useMocked, useCurrentUser, useSignedIn } from "@/app/state/hooks";
+import { applyRecruitment, getRecruitmentDetail } from "@/app/api/helper";
 import ParticipantsCount from "@/app/components/ParticipantsCount";
 import Capsule from "@/app/components/Capsule";
 import { getColorScheme } from "@/app/target";
 
 export default function Article({ params }: { params: { slug: string } }) {
+  const signedIn = useSignedIn();
+  const mocked = useMocked();
+  const currentUser = useCurrentUser();
+
   let recruitmentId = Number(params.slug);
   const { isLoading, data } = useQuery(["getRecruitmentDetail", recruitmentId], () =>
     getRecruitmentDetail(recruitmentId)
@@ -16,6 +21,24 @@ export default function Article({ params }: { params: { slug: string } }) {
 
   if (isLoading || !data) {
     return <div>Loading...</div>;
+  }
+
+  async function handleApply() {
+    if (!signedIn) {
+      console.log("You are not signed in");
+      return;
+    }
+
+    if (mocked) {
+      console.log("apply");
+      console.log({
+        recruitmentId: recruitmentId,
+        userId: currentUser!.id
+      });
+      return;
+    }
+
+    await applyRecruitment(recruitmentId, currentUser!.id);
   }
 
   return (
@@ -60,7 +83,7 @@ export default function Article({ params }: { params: { slug: string } }) {
           <Text>{data.recruitment.area}</Text>
         </dd>
       </dl>
-      <Button bg="#ff9900" color="white" width="100%" marginTop="1em">
+      <Button onClick={handleApply} bg="#ff9900" color="white" width="100%" marginTop="1em">
         応募する
       </Button>
     </Box>
